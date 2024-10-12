@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-12 text-center">
+    <h1 class="title">Tutorial project</h1>
+    <div class="btn-group">
+      <button
+        type="button"
+        [ngClass]="
+          componentName == 'Roles' ? 'btn btn-info' : 'btn btn-primary'
+        "
+        (click)="changeComponent('Roles')"
+      >
+        Roles
+      </button>
+      <button
+        type="button"
+        [ngClass]="
+          componentName == 'Designation' ? 'btn btn-info' : 'btn btn-primary'
+        "
+        (click)="changeComponent('Designation')"
+      >
+        Designation
+      </button>
+    </div>
+
+    <div class="col-12">
+      <app-roles [hidden]="componentName !== 'Roles'"></app-roles>
+      <app-designation [hidden]="componentName !== 'Designation'"></app-designation>
+    </div>
+  </div>
+</div>

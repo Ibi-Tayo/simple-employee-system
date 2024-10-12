@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-12 roles-table" style="height: 100vh">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Role ID No</th>
+          <th>Role Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (role of rolesList; track role.roleId) {
+        <tr>
+          <td>{{ role.roleId }}</td>
+          <td>{{ role.role }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
