@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { RolesService } from '../../services/roles.service';
 import { Role } from '../../model/Role';
 
-
 @Component({
   selector: 'app-roles',
   standalone: true,
@@ -17,11 +16,13 @@ export class RolesComponent implements OnInit {
   rolesList: Role[] = [];
 
   ngOnInit(): void {
-    this.rolesService.getAllRoles().subscribe((response) => {
-      this.rolesList = response.data;
+    this.rolesService.getAllRoles().subscribe({
+      next: (response) => {
+        this.rolesList = response.data;
+      },
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
-
 }
-
-

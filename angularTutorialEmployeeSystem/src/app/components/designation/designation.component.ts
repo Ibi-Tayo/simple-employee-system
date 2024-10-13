@@ -7,18 +7,21 @@ import { Designation } from '../../model/Role';
   standalone: true,
   imports: [],
   templateUrl: './designation.component.html',
-  styleUrl: './designation.component.scss'
+  styleUrl: './designation.component.scss',
 })
-export class DesignationComponent implements OnInit{
+export class DesignationComponent implements OnInit {
   constructor(private designationService: DesignationService) {}
 
   designationList: Designation[] = [];
 
   ngOnInit(): void {
-    this.designationService.getAllDesignation().subscribe((response) => {
-      this.designationList = response.data
+    this.designationService.getAllDesignation().subscribe({
+      next: (res) => {
+        this.designationList = res.data;
+      },
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
-
-
 }

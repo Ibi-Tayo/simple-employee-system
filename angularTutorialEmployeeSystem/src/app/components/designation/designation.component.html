@@ -1,1 +1,12 @@
-<p>designation works!</p>
+<div class="external">
+  @for (d of designationList; track d.designationId) {
+  <div class="card">
+    <img class="card-img-top" src="profile1.jpg" alt="Card image" />
+    <div class="card-body">
+      <h4 class="card-title">{{ d.designation }}</h4>
+      <p class="card-text">Someone's designation.</p>
+      <a href="#" class="btn btn-primary">See Profile</a>
+    </div>
+  </div>
+  }
+</div>

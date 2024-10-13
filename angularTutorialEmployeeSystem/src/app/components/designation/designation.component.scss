@@ -1,0 +1,14 @@
+.external {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 200px;
+  height: 400px;
+  margin: 10px;
+  border: 8px solid;
+  border-radius: 15px;
+}
