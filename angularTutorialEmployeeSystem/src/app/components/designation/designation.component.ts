@@ -13,15 +13,19 @@ export class DesignationComponent implements OnInit {
   constructor(private designationService: DesignationService) {}
 
   designationList: Designation[] = [];
+  isLoading: boolean = false;
 
   ngOnInit(): void {
+    this.isLoading = true
     this.designationService.getAllDesignation().subscribe({
       next: (res) => {
         this.designationList = res.data;
+        this.isLoading = false;
       },
       error: (err) => {
         console.error(err);
-      },
+        this.isLoading = false;
+      }
     });
   }
 }

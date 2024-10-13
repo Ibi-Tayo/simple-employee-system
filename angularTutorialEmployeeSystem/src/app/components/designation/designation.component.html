@@ -1,12 +1,15 @@
-<div class="external">
-  @for (d of designationList; track d.designationId) {
-  <div class="card">
-    <img class="card-img-top" src="images/profile1.jpg" alt="Card image" />
-    <div class="card-body">
-      <h4 class="card-title">{{ d.designation }}</h4>
-      <p class="card-text">Someone's designation.</p>
-      <a href="#" class="btn btn-primary">See Profile</a>
+  <div class="external">
+    <div [hidden]="!isLoading" class="spinner-border text-info m-5"></div>
+    @for (d of designationList; track d.designationId) {
+    <div class="card">
+      <img class="card-img-top" src="images/profile1.jpg" alt="Card image" />
+      <div class="card-body">
+        <h4 class="card-title">{{ d.designation }}</h4>
+        <p class="card-text">Someone's designation.</p>
+        <a href="#" class="btn btn-primary">See Profile</a>
+      </div>
     </div>
+    }
   </div>
-  }
-</div>
+
+
