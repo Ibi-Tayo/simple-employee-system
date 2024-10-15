@@ -11,27 +11,24 @@ import { ApiResponse } from '../model/Role';
 export class ClientService {
   postUrl: string = '/api/ClientStrive/AddUpdateClient';
   getUrl: string = '/api/ClientStrive/GetAllClients';
+  deleteUrl: string = '/api/ClientStrive/DeleteClientByClientId';
 
   constructor(private http: HttpClient) {}
 
-  addNewClient(clientForm: FormGroup): boolean {
+  addNewClient(clientForm: FormGroup): Observable<ApiResponse<null>> | null {
     if (clientForm.valid) {
       const clientData: Client = clientForm.value;
-      this.http.post(this.postUrl, clientData).subscribe({
-        next: (res) => {
-          console.log(res);
-          return true;
-        },
-        error: (err) => {
-          console.error(err);
-          return false;
-        },
-      });
+      return this.http.post<ApiResponse<null>>(this.postUrl, clientData);
+    } else {
+      return null
     }
-    return false;
   }
 
   getAllClients(): Observable<ApiResponse<Client[]>> {
     return this.http.get<ApiResponse<Client[]>>(this.getUrl);
+  }
+
+  deleteClientById(id: number): Observable<ApiResponse<null>> {
+   return this.http.delete<ApiResponse<null>>(this.deleteUrl, { params: { clientId: id } });
   }
 }

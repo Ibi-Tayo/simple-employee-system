@@ -9,5 +9,6 @@ export interface Designation {
 }
 export interface ApiResponse<T> {
   data: T;
+  result: boolean;
 }
 
