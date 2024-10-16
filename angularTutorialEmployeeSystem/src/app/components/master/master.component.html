@@ -9,22 +9,22 @@
         "
         (click)="changeComponent('Roles')"
       >
-        Roles
+        User Roles
       </button>
       <button
         type="button"
         [ngClass]="
-          componentName == 'Designation' ? 'btn btn-info' : 'btn btn-primary'
+          componentName == 'Jobs' ? 'btn btn-info' : 'btn btn-primary'
         "
-        (click)="changeComponent('Designation')"
+        (click)="changeComponent('Jobs')"
       >
-        Designation
+        Company Jobs
       </button>
     </div>
 
     <div class="col-12">
       <app-roles [hidden]="componentName !== 'Roles'"></app-roles>
-      <app-designation [hidden]="componentName !== 'Designation'"></app-designation>
+      <app-job [hidden]="componentName !== 'Jobs'"></app-job>
     </div>
   </div>
 </div>

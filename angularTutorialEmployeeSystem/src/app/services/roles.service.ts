@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiResponse, Role } from '../model/Role';
 import { Observable } from 'rxjs';
+import { Role } from '../model/Role';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +9,10 @@ import { Observable } from 'rxjs';
 export class RolesService {
   constructor(private http: HttpClient) {}
 
-  rolesRequestUrl: string = '/api/ClientStrive/GetAllRoles';
+  rolesRequestUrl: string = '/roles';
 
-  getAllRoles(): Observable<ApiResponse<Role[]>> {
-    return this.http.get<ApiResponse<Role[]>>(this.rolesRequestUrl);
+  getAllRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(this.rolesRequestUrl);
   }
 }
 

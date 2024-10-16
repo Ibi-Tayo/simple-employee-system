@@ -1,1 +1,114 @@
-<p>employee works!</p>
+<div class="row">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header bg-success">Client List</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 roles-table" style="height: 100vh">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID No</th>
+                  <th>Name</th>
+                  <th>Company</th>
+                  <th>City</th>
+                  <th>Salary</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (employee of allEmployees; track employee.id) {
+                <tr>
+                  <td>{{ employee.id }}</td>
+                  <td>{{ employee.name }}</td>
+                  <td>{{ employee.company }}</td>
+                  <td>{{ employee.city }}</td>
+                  <td>{{ employee.salary }}</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header bg-success">New Client</div>
+      <div class="card-body">
+        <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-6">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                formControlName="name"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="company">Company</label>
+              <input
+                type="text"
+                id="company"
+                formControlName="company"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                id="address"
+                formControlName="address"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="city">City</label>
+              <input
+                type="text"
+                id="city"
+                formControlName="city"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="postcode">Postcode</label>
+              <input
+                type="text"
+                id="postcode"
+                formControlName="postcode"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="salary">Salary</label>
+              <input
+                type="text"
+                id="salary"
+                formControlName="salary"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success mt-3" [disabled]="!employeeForm.valid">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div class="card mt-2">
+      <div class="card-header bg-success"> Actions </div>
+        <div class="card-body">
+          <h5>Delete client</h5>
+          <input type="number" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToDelete">
+          <button type="button" class="btn btn-danger mt-3" [disabled]="employeeIdToDelete == 0" (click)="deleteEmployee(employeeIdToDelete)">Delete</button>
+        </div>
+
+    </div>
+  </div>
+</div>
