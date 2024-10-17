@@ -90,7 +90,7 @@
             <div class="col-6">
               <label for="salary">Salary</label>
               <input
-                type="text"
+                type="number"
                 id="salary"
                 formControlName="salary"
                 class="form-control"
@@ -105,7 +105,7 @@
       <div class="card-header bg-success"> Actions </div>
         <div class="card-body">
           <h5>Delete client</h5>
-          <input type="number" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToDelete">
+          <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToDelete">
           <button type="button" class="btn btn-danger mt-3" [disabled]="employeeIdToDelete == 0" (click)="deleteEmployee(employeeIdToDelete)">Delete</button>
         </div>
 

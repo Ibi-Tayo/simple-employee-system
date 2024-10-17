@@ -73,11 +73,11 @@ export class EmployeeComponent implements OnInit {
           alert(`employee with id: ${id} has been deleted`)
           this.loadAllEmployees();
         } else {
-          alert('employee was not deleted for some reason')
         }
       },
       error: (err) => {
         console.error(err);
+        alert('employee was not deleted for some reason')
       }
     })
   }

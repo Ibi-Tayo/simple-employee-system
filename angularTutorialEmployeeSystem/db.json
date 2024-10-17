@@ -1,0 +1,179 @@
+{
+  "roles": [
+    {
+      "id": "1",
+      "role": "Super Admin"
+    },
+    {
+      "id": "2",
+      "role": "Admin"
+    },
+    {
+      "id": "3",
+      "role": "User"
+    },
+    {
+      "id": "4",
+      "role": "Guest"
+    },
+    {
+      "id": "5",
+      "role": "Anonymous"
+    },
+    {
+      "id": "6",
+      "role": "Tester"
+    },
+    {
+      "id": "7",
+      "role": "Developer"
+    },
+    {
+      "id": "8",
+      "role": "Designer"
+    },
+    {
+      "id": "9",
+      "role": "Manager"
+    },
+    {
+      "id": "10",
+      "role": "Director"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "1",
+      "job": "Software Engineer",
+      "shortDescription": "Develops software solutions by studying information needs; conferring with users; studying systems flow, data usage, and work processes; investigating problem areas; following the software development lifecycle."
+    },
+    {
+      "id": "2",
+      "job": "Web Developer",
+      "shortDescription": "Designs and develops websites and web applications by studying existing technology stack; analyzing browser compatibility techniques; evaluating solution architecture and design; developing documentation."
+    },
+    {
+      "id": "3",
+      "job": "Frontend Developer",
+      "shortDescription": "Designs and develops user interfaces by studying information needs; conferring with users; studying systems flow, data usage, and work processes; investigating problem areas; following the software development lifecycle."
+    },
+    {
+      "id": "4",
+      "job": "Backend Developer",
+      "shortDescription": "Designs and develops server-side applications by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+    },
+    {
+      "id": "5",
+      "job": "Fullstack Developer",
+      "shortDescription": "Designs and develops websites and web applications by studying existing technology stack; analyzing browser compatibility techniques; evaluating solution architecture and design; developing documentation."
+    },
+    {
+      "id": "6",
+      "job": "DevOps Engineer",
+      "shortDescription": "Designs and develops continuous integration and continuous deployment pipelines by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+    },
+    {
+      "id": "7",
+      "job": "System Administrator",
+      "shortDescription": "Designs and develops server infrastructure by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+    },
+    {
+      "id": "8",
+      "job": "Network Engineer",
+      "shortDescription": "Designs and develops network infrastructure by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+    },
+    {
+      "id": "9",
+      "job": "Database Administrator",
+      "shortDescription": "Designs and develops database infrastructure by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+    },
+    {
+      "id": "10",
+      "job": "Security Analyst",
+      "shortDescription": "Designs and develops security infrastructure by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+    }
+  ],
+  "employees": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "company": "financial times",
+      "salary": 50000,
+      "address": "123 Main St",
+      "city": "London",
+      "postCode": "sw4 9gh"
+    },
+    {
+      "id": "2",
+      "name": "Jane Doe",
+      "company": "google",
+      "salary": 60000,
+      "address": "456 Main St",
+      "city": "New York",
+      "postCode": "ny 10001"
+    },
+    {
+      "id": "3",
+      "name": "Alice Doe",
+      "company": "facebook",
+      "salary": 70000,
+      "address": "789 Main St",
+      "city": "San Francisco",
+      "postCode": "ca 94102"
+    },
+    {
+      "id": "4",
+      "name": "Bob Doe",
+      "company": "microsoft",
+      "salary": 80000,
+      "address": "101 Main St",
+      "city": "Seattle",
+      "postCode": "wa 98101"
+    },
+    {
+      "id": "5",
+      "name": "Charlie Doe",
+      "company": "apple",
+      "salary": 90000,
+      "address": "121 Main St",
+      "city": "Cupertino",
+      "postCode": "ca 95014"
+    },
+    {
+      "id": "6",
+      "name": "David Doe",
+      "company": "amazon",
+      "salary": 100000,
+      "address": "141 Main St",
+      "city": "Seattle",
+      "postCode": "wa 98101"
+    },
+    {
+      "id": "7",
+      "name": "Eve Doe",
+      "company": "twitter",
+      "salary": 110000,
+      "address": "161 Main St",
+      "city": "San Francisco",
+      "postCode": "ca 94102"
+    },
+    {
+      "id": "9",
+      "name": "Grace Doe",
+      "company": "netflix",
+      "salary": 130000,
+      "address": "201 Main St",
+      "city": "Los Gatos",
+      "postCode": "ca 95032"
+    },
+    {
+      "id": "10",
+      "name": "Harry Doe",
+      "company": "uber",
+      "salary": 140000,
+      "address": "221 Main St",
+      "city": "San Francisco",
+      "postCode": "ca 94102"
+    }
+  ]
+}
