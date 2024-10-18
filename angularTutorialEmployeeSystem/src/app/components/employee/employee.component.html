@@ -12,6 +12,7 @@
                   <th>Name</th>
                   <th>Company</th>
                   <th>City</th>
+                  <th>Job Title</th>
                   <th>Salary</th>
                 </tr>
               </thead>
@@ -22,6 +23,7 @@
                   <td>{{ employee.name }}</td>
                   <td>{{ employee.company }}</td>
                   <td>{{ employee.city }}</td>
+                  <td>{{ employee.job }}</td>
                   <td>{{ employee.salary }}</td>
                 </tr>
                 }
@@ -48,13 +50,37 @@
               />
             </div>
             <div class="col-6">
-              <label for="company">Company</label>
+              <label for="dOb">Date of Birth</label>
               <input
-                type="text"
-                id="company"
-                formControlName="company"
+                type="date"
+                id="dateOfBirth"
+                formControlName="dateOfBirth"
                 class="form-control"
               />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="jobTitle">Job Title</label>
+              <select
+                id="jobTitle"
+                formControlName="job"
+                class="form-control">
+                @for (job of jobTitles; track $index) {
+                <option value="{{ job }}">{{ job }}</option>
+                }
+            </select>
+            </div>
+            <div class="col-6">
+              <label for="company">Company</label>
+              <select
+                id="company"
+                formControlName="company"
+                class="form-control">
+                @for (company of companies; track $index) {
+                <option value="{{ company }}">{{ company }}</option>
+                }
+            </select>
             </div>
           </div>
           <div class="row">
@@ -93,6 +119,15 @@
                 type="number"
                 id="salary"
                 formControlName="salary"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="yearsOfExperience">Years of Experience</label>
+              <input
+                type="number"
+                id="yearsOfExperience"
+                formControlName="yearsOfExperience"
                 class="form-control"
               />
             </div>

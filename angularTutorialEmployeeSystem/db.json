@@ -97,83 +97,26 @@
     {
       "id": "1",
       "name": "John Doe",
-      "company": "financial times",
-      "salary": 50000,
+      "dateOfBirth": "01/01/1990",
+      "job": "Software Engineer",
+      "yearsOfExperience": 5,
+      "company": "Google",
+      "salary": 110000,
       "address": "123 Main St",
       "city": "London",
       "postCode": "sw4 9gh"
     },
     {
-      "id": "2",
-      "name": "Jane Doe",
-      "company": "google",
-      "salary": 60000,
-      "address": "456 Main St",
-      "city": "New York",
-      "postCode": "ny 10001"
-    },
-    {
-      "id": "3",
-      "name": "Alice Doe",
-      "company": "facebook",
-      "salary": 70000,
-      "address": "789 Main St",
-      "city": "San Francisco",
-      "postCode": "ca 94102"
-    },
-    {
-      "id": "4",
-      "name": "Bob Doe",
-      "company": "microsoft",
-      "salary": 80000,
-      "address": "101 Main St",
-      "city": "Seattle",
-      "postCode": "wa 98101"
-    },
-    {
-      "id": "5",
-      "name": "Charlie Doe",
-      "company": "apple",
-      "salary": 90000,
-      "address": "121 Main St",
-      "city": "Cupertino",
-      "postCode": "ca 95014"
-    },
-    {
-      "id": "6",
-      "name": "David Doe",
-      "company": "amazon",
+      "id": "8a08",
+      "name": "Tayo",
+      "dateOfBirth": "1995-05-29",
+      "job": "Full Stack Developer",
+      "yearsOfExperience": 1,
+      "company": "Amazon",
       "salary": 100000,
-      "address": "141 Main St",
-      "city": "Seattle",
-      "postCode": "wa 98101"
-    },
-    {
-      "id": "7",
-      "name": "Eve Doe",
-      "company": "twitter",
-      "salary": 110000,
-      "address": "161 Main St",
-      "city": "San Francisco",
-      "postCode": "ca 94102"
-    },
-    {
-      "id": "9",
-      "name": "Grace Doe",
-      "company": "netflix",
-      "salary": 130000,
-      "address": "201 Main St",
-      "city": "Los Gatos",
-      "postCode": "ca 95032"
-    },
-    {
-      "id": "10",
-      "name": "Harry Doe",
-      "company": "uber",
-      "salary": 140000,
-      "address": "221 Main St",
-      "city": "San Francisco",
-      "postCode": "ca 94102"
+      "address": "42 glenthorne",
+      "city": "London",
+      "postcode": "SM3 9NN"
     }
   ]
 }

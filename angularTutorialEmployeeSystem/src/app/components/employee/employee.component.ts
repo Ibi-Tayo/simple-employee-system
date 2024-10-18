@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { Employee } from '../../model/Employee';
 import { EmployeeService } from '../../services/employee.service';
+import { JobTitle } from '../../model/JobTitle';
+import { Company } from '../../model/Company';
 
 
 @Component({
@@ -21,13 +23,18 @@ export class EmployeeComponent implements OnInit {
   employeeForm!: FormGroup;
   allEmployees: Employee[] = [];
   employeeIdToDelete: number = 0;
+  jobTitles = Object.values(JobTitle);
+  companies = Object.values(Company);
 
   constructor(private fb: FormBuilder, private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
       name: ['', Validators.required],
-      company: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      job: [''],
+      yearsOfExperience: ['', Validators.required],
+      company: [''],
       salary: ['', Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
