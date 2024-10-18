@@ -8,9 +8,9 @@
         </tr>
       </thead>
       <tbody>
-        @for (role of rolesList; track role.roleId) {
+        @for (role of rolesList; track role.id) {
         <tr>
-          <td>{{ role.roleId }}</td>
+          <td>{{ role.id }}</td>
           <td>{{ role.role }}</td>
         </tr>
         }
