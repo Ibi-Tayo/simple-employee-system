@@ -1,46 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { Employee } from '../../model/Employee';
 import { EmployeeService } from '../../services/employee.service';
-import { JobTitle } from '../../model/JobTitle';
-import { Company } from '../../model/Company';
-
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../services/toast.service';
+import { message } from '../../model/Message';
+import { EmployeeFormComponent } from "../employee-form/employee-form.component";
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, NgbAlertModule, EmployeeFormComponent],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss',
 })
 export class EmployeeComponent implements OnInit {
-  employeeForm!: FormGroup;
-  allEmployees: Employee[] = [];
-  employeeIdToDelete: number = 0;
-  jobTitles = Object.values(JobTitle);
-  companies = Object.values(Company);
 
-  constructor(private fb: FormBuilder, private employeeService: EmployeeService) {}
+  allEmployees: Employee[] = [];
+  employeeIdToDelete: string = '';
+
+  constructor(
+
+    private employeeService: EmployeeService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
-    this.employeeForm = this.fb.group({
-      name: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
-      job: [''],
-      yearsOfExperience: ['', Validators.required],
-      company: [''],
-      salary: ['', Validators.required],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      postcode: ['', Validators.required]
-    });
-
     this.loadAllEmployees();
   }
 
@@ -50,42 +39,60 @@ export class EmployeeComponent implements OnInit {
         this.allEmployees = res;
       },
       error: (err) => {
+        this.toastService.addNewToast({
+          message: message.EmployeeLoadingFailMessage,
+          classname: 'bg-danger text-light',
+        });
         console.error(err);
       },
     });
   }
 
-  onSubmit(): void {
-    this.employeeService.addNewEmployee(this.employeeForm)?.subscribe({
+  addEmployee(employeeForm: FormGroup): void {
+    this.employeeService.addNewEmployee(employeeForm)?.subscribe({
       next: (res) => {
         console.log(res);
         if (res) {
-          alert('success! employee has been added');
+          this.toastService.addNewToast({
+            message: message.EmployeeAdditionSuccessMessage(
+              employeeForm.value['name']
+            ),
+            classname: 'bg-success text-light',
+          });
           this.loadAllEmployees();
-        } else {
-          alert('employee was not added');
         }
       },
       error: (err) => {
+        this.toastService.addNewToast({
+          message: message.EmployeeAdditionFailMessage(
+            employeeForm.value['name']
+          ),
+          classname: 'bg-danger text-light',
+        });
         console.error(err);
       },
     });
   }
 
-  deleteEmployee(id: number) {
+  deleteEmployee(id: string) {
     this.employeeService.deleteEmployeeById(id).subscribe({
       next: (res) => {
         if (res) {
           console.log(res);
-          alert(`employee with id: ${id} has been deleted`)
+          this.toastService.addNewToast({
+            message: message.EmployeeDeletionSuccessMessage(id),
+            classname: 'bg-success text-light',
+          });
           this.loadAllEmployees();
-        } else {
         }
       },
       error: (err) => {
+        this.toastService.addNewToast({
+          message: message.EmployeeDeletionFailMessage(id),
+          classname: 'bg-danger text-light',
+        });
         console.error(err);
-        alert('employee was not deleted for some reason')
-      }
-    })
+      },
+    });
   }
 }

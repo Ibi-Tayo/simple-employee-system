@@ -1,0 +1,10 @@
+@for (toast of toastService.ToastList(); track $index) {
+<ngb-toast
+  [class]="toast.classname"
+  [autohide]="true"
+  [delay]="toast.delay || 5000"
+  (hidden)="toastService.removeToast(toast)"
+>
+  {{ toast.message }}</ngb-toast
+>
+}

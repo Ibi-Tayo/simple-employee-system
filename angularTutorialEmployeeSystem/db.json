@@ -95,18 +95,6 @@
   ],
   "employees": [
     {
-      "id": "1",
-      "name": "John Doe",
-      "dateOfBirth": "01/01/1990",
-      "job": "Software Engineer",
-      "yearsOfExperience": 5,
-      "company": "Google",
-      "salary": 110000,
-      "address": "123 Main St",
-      "city": "London",
-      "postCode": "sw4 9gh"
-    },
-    {
       "id": "8a08",
       "name": "Tayo",
       "dateOfBirth": "1995-05-29",
@@ -117,6 +105,78 @@
       "address": "42 glenthorne",
       "city": "London",
       "postcode": "SM3 9NN"
+    },
+    {
+      "id": "cd37",
+      "name": "Ash Ketchum",
+      "dateOfBirth": "1984-10-20",
+      "job": "DevOps Engineer",
+      "yearsOfExperience": 20,
+      "company": "Netflix",
+      "salary": 1000000,
+      "address": "Kanto",
+      "city": "Kanto Region",
+      "postcode": "Unknown"
+    },
+    {
+      "id": "7d64",
+      "name": "Simba",
+      "dateOfBirth": "1984-10-20",
+      "job": "Front End Developer",
+      "yearsOfExperience": 22,
+      "company": "LinkedIn",
+      "salary": 1000000,
+      "address": "African street",
+      "city": "Pride Rock",
+      "postcode": "Unknown"
+    },
+    {
+      "id": "e25b",
+      "name": "Ibi",
+      "dateOfBirth": "1995-05-20",
+      "job": "Software Engineer",
+      "yearsOfExperience": 1,
+      "company": "WTW",
+      "salary": 100000,
+      "address": "London",
+      "city": "London",
+      "postcode": "None of yo business"
+    },
+    {
+      "id": "1ce4",
+      "name": "t",
+      "dateOfBirth": "2024-10-03",
+      "job": "System Administrator",
+      "yearsOfExperience": 7,
+      "company": "Netflix",
+      "salary": 99,
+      "address": "k",
+      "city": "cc",
+      "postcode": "jj"
+    },
+    {
+      "id": "ea0e",
+      "name": "t",
+      "dateOfBirth": "2024-10-03",
+      "job": "System Administrator",
+      "yearsOfExperience": 7,
+      "company": "Netflix",
+      "salary": 99,
+      "address": "k",
+      "city": "cc",
+      "postcode": "jj"
+    },
+    {
+      "id": "e4a4",
+      "name": "t",
+      "dateOfBirth": "2024-10-03",
+      "job": "System Administrator",
+      "yearsOfExperience": 7,
+      "company": "Netflix",
+      "salary": 99,
+      "address": "k",
+      "city": "cc",
+      "postcode": "jj"
     }
   ]
 }
