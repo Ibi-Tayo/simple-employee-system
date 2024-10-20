@@ -1,52 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { Employee } from '../../model/Employee';
 import { EmployeeService } from '../../services/employee.service';
-import { JobTitle } from '../../model/JobTitle';
-import { Company } from '../../model/Company';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../services/toast.service';
 import { message } from '../../model/Message';
+import { EmployeeFormComponent } from "../employee-form/employee-form.component";
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgbAlertModule],
+  imports: [FormsModule, ReactiveFormsModule, NgbAlertModule, EmployeeFormComponent],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss',
 })
 export class EmployeeComponent implements OnInit {
-  employeeForm!: FormGroup;
+
   allEmployees: Employee[] = [];
   employeeIdToDelete: string = '';
-  jobTitles = Object.values(JobTitle);
-  companies = Object.values(Company);
 
   constructor(
-    private fb: FormBuilder,
+
     private employeeService: EmployeeService,
     private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
-    this.employeeForm = this.fb.group({
-      name: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
-      job: ['', Validators.required],
-      yearsOfExperience: ['', Validators.required],
-      company: ['', Validators.required],
-      salary: ['', Validators.required],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      postcode: ['', Validators.required],
-    });
-
     this.loadAllEmployees();
   }
 
@@ -65,14 +48,14 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  addEmployee(): void {
-    this.employeeService.addNewEmployee(this.employeeForm)?.subscribe({
+  addEmployee(employeeForm: FormGroup): void {
+    this.employeeService.addNewEmployee(employeeForm)?.subscribe({
       next: (res) => {
         console.log(res);
         if (res) {
           this.toastService.addNewToast({
             message: message.EmployeeAdditionSuccessMessage(
-              this.employeeForm.value['name']
+              employeeForm.value['name']
             ),
             classname: 'bg-success text-light',
           });
@@ -82,7 +65,7 @@ export class EmployeeComponent implements OnInit {
       error: (err) => {
         this.toastService.addNewToast({
           message: message.EmployeeAdditionFailMessage(
-            this.employeeForm.value['name']
+            employeeForm.value['name']
           ),
           classname: 'bg-danger text-light',
         });
