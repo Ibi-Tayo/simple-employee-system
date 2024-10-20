@@ -16,6 +16,7 @@ export class EmployeeFormComponent implements OnInit {
   employeeForm!: FormGroup;
   jobTitles = Object.values(JobTitle);
   companies = Object.values(Company);
+  isSubmitted = false;
 
   constructor(private fb: FormBuilder) {}
 
@@ -34,8 +35,11 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   formSubmitter(): void {
+    this.isSubmitted = true;
     if (this.employeeForm.valid) {
       this.formSubmit.emit(this.employeeForm);
+      this.isSubmitted = false;
+      this.employeeForm.reset();
     }
   }
 

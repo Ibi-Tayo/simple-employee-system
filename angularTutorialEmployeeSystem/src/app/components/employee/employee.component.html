@@ -45,10 +45,9 @@
       <div class="card-header bg-success"> Actions </div>
         <div class="card-body">
           <h5>Delete Employee</h5>
-          <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToDelete">
+          <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToDelete" (keydown.enter)="deleteEmployee(employeeIdToDelete)">
           <button type="button" class="btn btn-danger mt-3" [disabled]="employeeIdToDelete == ''" (click)="deleteEmployee(employeeIdToDelete)">Delete</button>
         </div>
-
     </div>
   </div>
 </div>

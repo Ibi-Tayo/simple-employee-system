@@ -1,4 +1,4 @@
-<form class="was-validated" [formGroup]="employeeForm" (ngSubmit)="formSubmitter()">
+<form [class.was-validated]="isSubmitted" [formGroup]="employeeForm" (ngSubmit)="formSubmitter()">
   <div class="row">
     <div class="col-6">
       <label for="name">Name</label>
@@ -9,9 +9,6 @@
         class="form-control"
         required
       >
-      @if (employeeForm.get('name')?.hasError('required') && employeeForm.get('name')?.touched) {
-        <div class="invalid-feedback">You must enter a name.</div>
-      }
     </div>
     <div class="col-6">
       <label for="dOb">Date of Birth</label>
@@ -110,5 +107,5 @@
       }
     </div>
   </div>
-  <button type="submit" class="btn btn-success mt-3" [disabled]="!employeeForm.valid">Submit</button>
+  <button type="submit" class="btn btn-success mt-3">Submit</button>
 </form>
