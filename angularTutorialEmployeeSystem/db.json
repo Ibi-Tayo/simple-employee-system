@@ -95,18 +95,6 @@
   ],
   "employees": [
     {
-      "id": "1",
-      "name": "John Doe",
-      "dateOfBirth": "01/01/1990",
-      "job": "Software Engineer",
-      "yearsOfExperience": 5,
-      "company": "Google",
-      "salary": 110000,
-      "address": "123 Main St",
-      "city": "London",
-      "postCode": "sw4 9gh"
-    },
-    {
       "id": "8a08",
       "name": "Tayo",
       "dateOfBirth": "1995-05-29",
@@ -117,6 +105,18 @@
       "address": "42 glenthorne",
       "city": "London",
       "postcode": "SM3 9NN"
+    },
+    {
+      "id": "ed57",
+      "name": "Jonny",
+      "dateOfBirth": "1991-10-02",
+      "job": "Network Administrator",
+      "yearsOfExperience": 5,
+      "company": "Meta",
+      "salary": 40000,
+      "address": "bleak street",
+      "city": "calcutta",
+      "postcode": "smg 8nn"
     }
   ]
 }

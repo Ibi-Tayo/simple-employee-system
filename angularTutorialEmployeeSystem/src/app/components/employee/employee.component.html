@@ -38,7 +38,7 @@
     <div class="card">
       <div class="card-header bg-success">New Client</div>
       <div class="card-body">
-        <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
           <div class="row">
             <div class="col-6">
               <label for="name">Name</label>
@@ -141,7 +141,7 @@
         <div class="card-body">
           <h5>Delete client</h5>
           <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToDelete">
-          <button type="button" class="btn btn-danger mt-3" [disabled]="employeeIdToDelete == 0" (click)="deleteEmployee(employeeIdToDelete)">Delete</button>
+          <button type="button" class="btn btn-danger mt-3" [disabled]="employeeIdToDelete == ''" (click)="deleteEmployee(employeeIdToDelete)">Delete</button>
         </div>
 
     </div>
