@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-8">
     <div class="card">
-      <div class="card-header bg-success">Client List</div>
+      <div class="card-header bg-success">Employee Table</div>
       <div class="card-body">
         <div class="row">
           <div class="col-12 roles-table" style="height: 100vh">
@@ -36,9 +36,9 @@
   </div>
   <div class="col-4">
     <div class="card">
-      <div class="card-header bg-success">New Client</div>
+      <div class="card-header bg-success">Add Employee</div>
       <div class="card-body">
-        <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
+        <form class="was-validated" [formGroup]="employeeForm" (ngSubmit)="addEmployee()">
           <div class="row">
             <div class="col-6">
               <label for="name">Name</label>
@@ -47,6 +47,7 @@
                 id="name"
                 formControlName="name"
                 class="form-control"
+                required
               />
             </div>
             <div class="col-6">
@@ -56,6 +57,7 @@
                 id="dateOfBirth"
                 formControlName="dateOfBirth"
                 class="form-control"
+                required
               />
             </div>
           </div>
@@ -65,7 +67,8 @@
               <select
                 id="jobTitle"
                 formControlName="job"
-                class="form-control">
+                class="form-control"
+                required>
                 @for (job of jobTitles; track $index) {
                 <option value="{{ job }}">{{ job }}</option>
                 }
@@ -76,7 +79,8 @@
               <select
                 id="company"
                 formControlName="company"
-                class="form-control">
+                class="form-control"
+                required>
                 @for (company of companies; track $index) {
                 <option value="{{ company }}">{{ company }}</option>
                 }
@@ -91,6 +95,7 @@
                 id="address"
                 formControlName="address"
                 class="form-control"
+                required
               />
             </div>
             <div class="col-6">
@@ -100,6 +105,7 @@
                 id="city"
                 formControlName="city"
                 class="form-control"
+                required
               />
             </div>
           </div>
@@ -111,6 +117,7 @@
                 id="postcode"
                 formControlName="postcode"
                 class="form-control"
+                required
               />
             </div>
             <div class="col-6">
@@ -120,7 +127,11 @@
                 id="salary"
                 formControlName="salary"
                 class="form-control"
+                required
               />
+              @if (employeeForm.get('salary')?.touched) {
+                <div class="invalid-feedback">You must enter a valid number.</div>
+              }
             </div>
             <div class="col-6">
               <label for="yearsOfExperience">Years of Experience</label>
@@ -129,7 +140,11 @@
                 id="yearsOfExperience"
                 formControlName="yearsOfExperience"
                 class="form-control"
+                required
               />
+              @if (employeeForm.get('yearsOfExperience')?.touched) {
+                <div class="invalid-feedback">You must enter a valid number.</div>
+              }
             </div>
           </div>
           <button type="submit" class="btn btn-success mt-3" [disabled]="!employeeForm.valid">Submit</button>
@@ -139,7 +154,7 @@
     <div class="card mt-2">
       <div class="card-header bg-success"> Actions </div>
         <div class="card-body">
-          <h5>Delete client</h5>
+          <h5>Delete Employee</h5>
           <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToDelete">
           <button type="button" class="btn btn-danger mt-3" [disabled]="employeeIdToDelete == ''" (click)="deleteEmployee(employeeIdToDelete)">Delete</button>
         </div>

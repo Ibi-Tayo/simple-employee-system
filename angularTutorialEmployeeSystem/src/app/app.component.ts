@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { RolesComponent } from './components/roles/roles.component';
 import { MasterComponent } from "./components/master/master.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { ToastContainerComponent } from "./toast-container/toast-container.component";
+import { ToastContainerComponent } from './components/toast-container/toast-container.component';
 
 @Component({
   selector: 'app-root',
