@@ -48,6 +48,11 @@
           <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToDelete" (keydown.enter)="deleteEmployee(employeeIdToDelete)">
           <button type="button" class="btn btn-danger mt-3" [disabled]="employeeIdToDelete == ''" (click)="deleteEmployee(employeeIdToDelete)">Delete</button>
         </div>
+        <!-- <div class="card-body">
+          <h5>Update Employee</h5>
+          <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToUpdate">
+          <button type="button" class="btn btn-input mt-3" (click)="updateEmployee(employeeIdToUpdate)"></button>
+        </div> -->
     </div>
   </div>
 </div>

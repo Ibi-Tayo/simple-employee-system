@@ -7,6 +7,10 @@ export class Message {
     `Employee with name: ${name} has been been added to the system`;
   EmployeeAdditionFailMessage = (name: string): string =>
     `Employee with name: ${name} was not added, try again later`;
+  EmployeeUpdateSuccessMessage = (name: string): string =>
+    `Employee with name: ${name} has had their details updated`;
+  EmployeeUpdateFailMessage = (name: string): string =>
+    `Employee with name: ${name} was not updated`;
 
   EmployeeLoadingFailMessage = "There was a problem loading the employees table, try again later"
 }

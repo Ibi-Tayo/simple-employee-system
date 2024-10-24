@@ -22,6 +22,7 @@ export class EmployeeComponent implements OnInit {
 
   allEmployees: Employee[] = [];
   employeeIdToDelete: string = '';
+  employeeIdToUpdate: string = '';
 
   constructor(
 
@@ -65,6 +66,32 @@ export class EmployeeComponent implements OnInit {
       error: (err) => {
         this.toastService.addNewToast({
           message: message.EmployeeAdditionFailMessage(
+            employeeForm.value['name']
+          ),
+          classname: 'bg-danger text-light',
+        });
+        console.error(err);
+      },
+    });
+  }
+
+  updateEmployee(employeeForm: FormGroup, id: string) {
+    this.employeeService.updateEmployee(employeeForm, id)?.subscribe({
+      next: (res) => {
+        console.log(res);
+        if (res) {
+          this.toastService.addNewToast({
+            message: message.EmployeeUpdateSuccessMessage(
+              employeeForm.value['name']
+            ),
+            classname: 'bg-success text-light',
+          });
+          this.loadAllEmployees();
+        }
+      },
+      error: (err) => {
+        this.toastService.addNewToast({
+          message: message.EmployeeUpdateFailMessage(
             employeeForm.value['name']
           ),
           classname: 'bg-danger text-light',
