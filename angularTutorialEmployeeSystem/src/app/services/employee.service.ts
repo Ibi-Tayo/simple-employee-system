@@ -21,6 +21,14 @@ export class EmployeeService {
     return null;
   }
 
+  updateEmployee(employeeForm: FormGroup, id: string) : Observable<Employee> | null {
+    if (employeeForm.valid) {
+      const employeeData: Employee = employeeForm.value;
+      return this.http.put<Employee>(`${this.url}/${id}`, employeeData);
+    }
+    return null;
+  }
+
   getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.url);
   }
