@@ -1,17 +1,32 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { JobTitle } from '../../model/JobTitle';
 import { Company } from '../../model/Company';
+import { Employee } from '../../model/Employee';
 
 @Component({
   selector: 'app-employee-form',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.scss'
+  styleUrl: './employee-form.component.scss',
 })
 export class EmployeeFormComponent implements OnInit {
-  @Output() formSubmit = new EventEmitter<FormGroup>()
+  @Output() formSubmit = new EventEmitter<FormGroup>();
+  @Input() employeeToUpdate: Employee | null = null;
 
   employeeForm!: FormGroup;
   jobTitles = Object.values(JobTitle);
@@ -34,13 +49,36 @@ export class EmployeeFormComponent implements OnInit {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['employeeToUpdate'] &&
+      changes['employeeToUpdate'].currentValue
+    ) {
+      this.setFormValues(changes['employeeToUpdate'].currentValue);
+    }
+  }
+
+  private setFormValues(employee: Employee): void {
+    this.employeeForm.patchValue({
+      name: employee.name,
+      dateOfBirth: employee.dateOfBirth,
+      job: employee.job,
+      yearsOfExperience: employee.yearsOfExperience,
+      company: employee.company,
+      salary: employee.salary,
+      address: employee.address,
+      city: employee.city,
+      postcode: employee.postcode,
+    });
+  }
+
   formSubmitter(): void {
     this.isSubmitted = true;
     if (this.employeeForm.valid) {
       this.formSubmit.emit(this.employeeForm);
       this.isSubmitted = false;
       this.employeeForm.reset();
+      this.employeeToUpdate = null;
     }
   }
-
 }

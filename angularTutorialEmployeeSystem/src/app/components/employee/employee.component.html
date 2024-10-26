@@ -38,21 +38,49 @@
     <div class="card">
       <div class="card-header bg-success">Add Employee</div>
       <div class="card-body">
-        <app-employee-form (formSubmit)="addEmployee($event)"></app-employee-form>
+        <app-employee-form
+          (formSubmit)="addEmployee($event)"
+        ></app-employee-form>
       </div>
     </div>
     <div class="card mt-2">
-      <div class="card-header bg-success"> Actions </div>
-        <div class="card-body">
-          <h5>Delete Employee</h5>
-          <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToDelete" (keydown.enter)="deleteEmployee(employeeIdToDelete)">
-          <button type="button" class="btn btn-danger mt-3" [disabled]="employeeIdToDelete == ''" (click)="deleteEmployee(employeeIdToDelete)">Delete</button>
-        </div>
-        <!-- <div class="card-body">
-          <h5>Update Employee</h5>
-          <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="employeeIdToUpdate">
-          <button type="button" class="btn btn-input mt-3" (click)="updateEmployee(employeeIdToUpdate)"></button>
-        </div> -->
+      <div class="card-header bg-success">Actions</div>
+      <div class="card-body">
+        <h5>Delete Employee</h5>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter ID"
+          [(ngModel)]="employeeIdToDelete"
+          (keydown.enter)="deleteEmployee(employeeIdToDelete)"
+        />
+        <button
+          type="button"
+          class="btn btn-danger mt-3"
+          [disabled]="!employeeIdToDelete"
+          (click)="deleteEmployee(employeeIdToDelete)"
+        >
+          Delete
+        </button>
+      </div>
+      <div class="card-body">
+        <h5>Update Employee</h5>
+        <form (ngSubmit)="getEmployeeByIdForUpdate(employeeIdToUpdate)">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter ID"
+            [(ngModel)]="employeeIdToUpdate"
+            name="employeeIdToUpdate"
+          />
+          <button [disabled]="!employeeIdToUpdate" type="submit" class="btn btn-info mt-3">Find Employee</button>
+        </form>
+        <app-employee-form
+          [hidden]="!showUpdateEmployee"
+          (formSubmit)="updateEmployee($event, employeeIdToUpdate)"
+          [employeeToUpdate]="employeeToUpdate"
+        ></app-employee-form>
+      </div>
     </div>
   </div>
 </div>
