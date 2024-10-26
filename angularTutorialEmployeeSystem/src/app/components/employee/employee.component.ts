@@ -1,27 +1,32 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Employee } from '../../model/Employee';
 import { EmployeeService } from '../../services/employee.service';
-import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../services/toast.service';
 import { message } from '../../model/Message';
-import { EmployeeFormComponent } from "../employee-form/employee-form.component";
+import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbAlertModule, EmployeeFormComponent],
+  imports: [
+    NgbPagination,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbAlertModule,
+    EmployeeFormComponent,
+  ],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss',
 })
 export class EmployeeComponent implements OnInit {
-
   allEmployees: Employee[] = [];
+  paginatedEmployees: Employee[] = [];
+  currentPageNumber: number = 1;
+  employeesPerPage: number = 6;
   employeeIdToDelete: string = '';
   employeeIdToUpdate: string = '';
   employeeToUpdate: Employee | null = null;
@@ -34,6 +39,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAllEmployees();
+    this.getPaginatedEmployees(this.currentPageNumber, this.employeesPerPage);
   }
 
   private loadAllEmployees() {
@@ -49,6 +55,24 @@ export class EmployeeComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+
+  getPaginatedEmployees(currentPageNo: number, employeesPerPage: number) {
+    this.employeeService
+      .getPaginatedEmployees(currentPageNo, employeesPerPage)
+      .subscribe({
+        next: (res) => {
+          this.paginatedEmployees = res.data;
+          console.log(this.paginatedEmployees)
+        },
+        error: (res) => {
+          console.log(res);
+          this.toastService.addNewToast({
+            message: message.EmployeeLoadingFailMessage,
+            classname: 'bg-danger text-light',
+          });
+        },
+      });
   }
 
   addEmployee(employeeForm: FormGroup): void {
@@ -78,15 +102,13 @@ export class EmployeeComponent implements OnInit {
   }
 
   updateEmployee(employeeForm: FormGroup, id: string) {
-    let employeeName: string = employeeForm.get('name')?.value
+    let employeeName: string = employeeForm.get('name')?.value;
     this.employeeService.updateEmployee(employeeForm, id)?.subscribe({
       next: (res) => {
         console.log(res);
         if (res) {
           this.toastService.addNewToast({
-            message: message.EmployeeUpdateSuccessMessage(
-              employeeName
-            ),
+            message: message.EmployeeUpdateSuccessMessage(employeeName),
             classname: 'bg-success text-light',
           });
           this.loadAllEmployees();
@@ -95,9 +117,7 @@ export class EmployeeComponent implements OnInit {
       },
       error: (err) => {
         this.toastService.addNewToast({
-          message: message.EmployeeUpdateFailMessage(
-            employeeName
-          ),
+          message: message.EmployeeUpdateFailMessage(employeeName),
           classname: 'bg-danger text-light',
         });
         console.error(err);
@@ -122,7 +142,7 @@ export class EmployeeComponent implements OnInit {
         this.employeeToUpdate = null;
       },
     });
-    return null
+    return null;
   }
 
   deleteEmployee(id: string) {

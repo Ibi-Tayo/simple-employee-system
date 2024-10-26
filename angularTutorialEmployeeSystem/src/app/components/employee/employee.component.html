@@ -17,7 +17,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for (employee of allEmployees; track employee.id) {
+                @for (employee of paginatedEmployees; track employee.id) {
                 <tr>
                   <td>{{ employee.id }}</td>
                   <td>{{ employee.name }}</td>
@@ -29,6 +29,29 @@
                 }
               </tbody>
             </table>
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination
+                [collectionSize]="allEmployees.length"
+                [(page)]="currentPageNumber"
+                [pageSize]="employeesPerPage"
+                (pageChange)="
+                  getPaginatedEmployees(currentPageNumber, employeesPerPage)
+                "
+                aria-label="Default pagination"
+              />
+              <select
+              class="form-select"
+              style="width: auto"
+              [(ngModel)]="employeesPerPage"
+              (ngModelChange)="
+                getPaginatedEmployees(currentPageNumber, employeesPerPage)
+              "
+            >
+              <option [ngValue]="2">2 items per page</option>
+              <option [ngValue]="4">4 items per page</option>
+              <option [ngValue]="6">6 items per page</option>
+            </select>
+            </div>
           </div>
         </div>
       </div>
@@ -73,7 +96,13 @@
             [(ngModel)]="employeeIdToUpdate"
             name="employeeIdToUpdate"
           />
-          <button [disabled]="!employeeIdToUpdate" type="submit" class="btn btn-info mt-3">Find Employee</button>
+          <button
+            [disabled]="!employeeIdToUpdate"
+            type="submit"
+            class="btn btn-info mt-3"
+          >
+            Find Employee
+          </button>
         </form>
         <app-employee-form
           [hidden]="!showUpdateEmployee"
