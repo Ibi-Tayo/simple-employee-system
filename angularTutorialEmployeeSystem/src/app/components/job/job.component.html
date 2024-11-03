@@ -1,25 +1,29 @@
 <div class="external">
   <div [hidden]="!isLoading" class="spinner-border text-info m-5"></div>
-  @for (j of jobList ; track j.id; let i = $index;) {
+  @for (j of jobList; track j.id; let i = $index;) {
     <div class="card-content">
-      <div class="card-image-title">
-        <img class="cardImage m-4" src="{{ j.imageUrl }}" alt="Card image" />
-        <div class="card-title">
-          <h2>{{ j.job }}</h2>
-          <button
-            type="button"
-            class="btn ms-2 learnMoreButton"
-            (click)="isCollapsed[i] = !isCollapsed[i]"
-            [attr.aria-expanded]="!isCollapsed[i]"
-            aria-controls="collapseExample"
-          >
-            Learn more
-          </button>
+      <div class="card-wrapper">
+        <div class="card-image-container">
+          <img class="cardImage" src="{{ j.imageUrl }}" alt="Card image" />
         </div>
-      </div>
-      <div class="card-body m-5">
-        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]" [horizontal]="true">
-          <p class="card-text" style="width: 40em">{{ j.shortDescription }}</p>
+        <div class="card-info">
+          <div class="card-title">
+            <h2>{{ j.job }}</h2>
+            <button
+              type="button"
+              class="btn ms-2 learnMoreButton"
+              (click)="isCollapsed[i] = !isCollapsed[i]"
+              [attr.aria-expanded]="!isCollapsed[i]"
+              aria-controls="collapseExample"
+            >
+              Learn more
+            </button>
+          </div>
+          <div class="card-body">
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
+              <p class="card-text">{{ j.shortDescription }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
