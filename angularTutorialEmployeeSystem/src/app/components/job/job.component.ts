@@ -23,7 +23,7 @@ export class JobComponent implements OnInit {
       next: (res) => {
         this.jobList = res;
         this.isLoading = false;
-        this.isCollapsed = new Array<boolean>(this.jobList.length).fill(true)
+        this.isCollapsed = this.jobList.map(() => true)
       },
       error: (err) => {
         console.error(err);

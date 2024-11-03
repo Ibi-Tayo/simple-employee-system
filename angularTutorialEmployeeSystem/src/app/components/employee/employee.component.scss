@@ -1,0 +1,10 @@
+.card-header {
+  background-color: #646695;
+}
+ngb-pagination ::ng-deep a {
+  color: #646695 !important;
+}
+
+ngb-pagination ::ng-deep ul > li.active > a {
+  background-color: #1f1f33 !important;
+}
