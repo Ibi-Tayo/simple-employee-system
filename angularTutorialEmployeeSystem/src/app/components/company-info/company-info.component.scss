@@ -1,0 +1,23 @@
+.img-wrapper {
+  max-height: 30em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  max-width: 100%;
+  // max-height: 700px;
+}
+
+.carousel-caption h3  {
+  color: beige;
+  background-color: #00000025
+}
+
+.carousel-caption p  {
+  color: beige;
+  background-color: #00000055
+}
+
+

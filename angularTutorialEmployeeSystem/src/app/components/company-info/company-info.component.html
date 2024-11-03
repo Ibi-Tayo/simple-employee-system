@@ -1,7 +1,7 @@
+<ngb-carousel>
 @for (company of companiesList; track $index) {
-  <ngb-carousel>
     <ng-template ngbSlide>
-      <div class="picsum-img-wrapper">
+      <div class="img-wrapper">
         <img [src]="company.imageUrl" [alt]="company.companyName + 'image logo'" />
       </div>
       <div class="carousel-caption">
@@ -9,5 +9,5 @@
         <p>{{company.shortDescription}}</p>
       </div>
     </ng-template>
-  </ngb-carousel>
-}
+  }
+</ngb-carousel>

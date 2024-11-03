@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgbCarouselConfig, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesService } from '../../services/companies.service';
 import { Company } from '../../model/Company';
@@ -12,8 +12,8 @@ import { Company } from '../../model/Company';
   providers: [NgbCarouselConfig]
 })
 export class CompanyInfoComponent implements OnInit {
-  private companiesService: CompaniesService = Inject(CompaniesService);
-  private carouselConfig: NgbCarouselConfig = Inject(NgbCarouselConfig);
+  private companiesService = inject(CompaniesService);
+  private carouselConfig = inject(NgbCarouselConfig);
   companiesList: Company[] = [];
 
   ngOnInit(): void {
