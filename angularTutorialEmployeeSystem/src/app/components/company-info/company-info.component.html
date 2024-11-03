@@ -1,1 +1,13 @@
-<p>company-info works!</p>
+@for (company of companiesList; track $index) {
+  <ngb-carousel>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="company.imageUrl" [alt]="company.companyName + 'image logo'" />
+      </div>
+      <div class="carousel-caption">
+        <h3>{{company.companyName}}</h3>
+        <p>{{company.shortDescription}}</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+}

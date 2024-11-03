@@ -602,5 +602,85 @@
   {"id":"OGfk","name":"Donnell Hedge","dateOfBirth":"1974-08-01","job":"Security Analyst","yearsOfExperience":14,"company":"Financial Times","city":"Split","salary":76000,"address":"49770 Lyons Lane","postcode":"wn8 9jk"},
   {"id":"rSb4","name":"Farlie De Bruyn","dateOfBirth":"1990-06-05","job":"Security Analyst","yearsOfExperience":14,"company":"Dropbox","city":"Turin","salary":92000,"address":"236 Lakewood Gardens Crossing","postcode":"pz0 3dr"},
   {"id":"BFQg","name":"Rolph Craw","dateOfBirth":"1999-04-09","job":"System Administrator","yearsOfExperience":7,"company":"LinkedIn","city":"Split","salary":69000,"address":"3 Division Hill","postcode":"rb3 2ul"},
-  {"id":"pDQN","name":"Stanford Gammade","dateOfBirth":"1988-02-19","job":"System Administrator","yearsOfExperience":20,"company":"Financial Times","city":"Edinburgh","salary":91000,"address":"02 Ohio Road","postcode":"xi7 9su"}]
+  {"id":"pDQN","name":"Stanford Gammade","dateOfBirth":"1988-02-19","job":"System Administrator","yearsOfExperience":20,"company":"Financial Times","city":"Edinburgh","salary":91000,"address":"02 Ohio Road","postcode":"xi7 9su"}],
+  "companies": [
+    {
+    "id": "1",
+      "companyName": "Apple",
+      "shortDescription": "Apple Inc. is a global technology company that designs, manufactures, and sells consumer electronics, computer software, and services. Known for innovative products like the iPhone, iPad, Mac computers, and Apple Watch, the company also provides services including the App Store, Apple Music, and iCloud. Apple's ecosystem integration, focus on design, and premium brand positioning have made it one of the world's most valuable companies. The company emphasizes privacy, security, and environmental sustainability in its operations and product development.",
+      "imageUrl": "images/apple.png"
+    },
+    {
+      "id": "2",
+      "companyName": "Google",
+      "shortDescription": "Google is a multinational technology company specializing in internet-related services and products, including search, online advertising, cloud computing, software, and hardware. As a subsidiary of Alphabet Inc., Google operates the world's most popular search engine and develops technologies for artificial intelligence, digital advertising, cloud services, and mobile software. The company is known for products like Gmail, Google Maps, Chrome browser, and the Android operating system, while also investing in innovative projects through various research initiatives.",
+      "imageUrl": "images/google.png"
+    },
+    {
+      "id": "3",
+      "companyName": "Microsoft",
+      "shortDescription": "Microsoft Corporation is a leading technology company that develops, manufactures, and sells computer software, consumer electronics, and personal computers. Best known for Windows operating system and Office software suite, Microsoft has expanded into cloud computing with Azure, gaming with Xbox, and enterprise solutions. The company focuses on digital transformation, artificial intelligence, and cloud services while maintaining its position in personal computing and productivity software.",
+      "imageUrl": "images/microsoft.png"
+    },
+    {
+      "id": "4",
+      "companyName": "Meta",
+      "shortDescription": "Meta Platforms, formerly Facebook, is a technology company focused on social networking, virtual reality, and metaverse technologies. The company operates popular platforms including Facebook, Instagram, WhatsApp, and Messenger, connecting billions of users worldwide. Meta invests heavily in virtual and augmented reality technologies, artificial intelligence, and developing the metaverse while managing social media platforms that facilitate global communication and digital advertising.",
+      "imageUrl": "images/meta.png"
+    },
+    {
+      "id": "5",
+      "companyName": "Amazon",
+      "shortDescription": "Amazon.com Inc. is a multinational technology company focusing on e-commerce, cloud computing, digital streaming, and artificial intelligence. Starting as an online bookstore, Amazon has grown into the world's largest e-commerce platform, while also leading in cloud services through AWS, streaming content through Prime Video, and developing AI technologies with Alexa. The company is known for innovation in logistics, retail technology, and customer service.",
+      "imageUrl": "images/amazon.png"
+    },
+    {
+      "id": "6",
+      "companyName": "Netflix",
+      "shortDescription": "Netflix is a streaming technology company providing subscription-based streaming service for movies, television, and original content. The company has transformed from a DVD-by-mail service to a global entertainment provider, producing award-winning original content and delivering streaming media to millions of subscribers worldwide. Netflix uses advanced algorithms for content recommendations and has revolutionized how people consume entertainment.",
+      "imageUrl": "images/netflix.png"
+    },
+    {
+      "id": "7",
+      "companyName": "Twitter",
+      "shortDescription": "Twitter is a social media platform that enables users to post and interact with messages known as tweets. The platform serves as a global public square for real-time communication, news sharing, and public discourse. Twitter has become essential for public communication, breaking news, and social engagement, used by individuals, organizations, and public figures worldwide for direct communication with their audiences.",
+      "imageUrl": "images/twitter.png"
+    },
+    {
+      "id": "8",
+      "companyName": "LinkedIn",
+      "shortDescription": "LinkedIn is a professional networking platform owned by Microsoft that connects professionals worldwide. The platform provides services for job searching, professional networking, business development, and career advancement. LinkedIn offers features for recruitment, professional development, industry news sharing, and business marketing, making it the primary platform for professional networking and career development.",
+      "imageUrl": "images/linkedin.png"
+    },
+    {
+      "id": "9",
+      "companyName": "Uber",
+      "shortDescription": "Uber Technologies Inc. is a technology company that has revolutionized transportation and delivery services through its platform. The company connects riders with drivers, restaurants with customers, and businesses with delivery services through its mobile applications. Uber has expanded beyond ride-sharing into food delivery, freight transport, and urban mobility solutions, while developing autonomous vehicle technology.",
+      "imageUrl": "images/uber.png"
+    },
+    {
+      "id": "10",
+      "companyName": "Airbnb",
+      "shortDescription": "Airbnb is a platform that connects people wanting to rent out their properties with people looking for accommodations. The company has transformed the hospitality industry by enabling private individuals to monetize their spaces while providing travelers with unique staying experiences. Airbnb's platform includes features for booking, reviewing, and managing properties, with services extending to experiences and luxury accommodations.",
+      "imageUrl": "images/airbnb.png"
+    },
+    {
+      "id": "11",
+      "companyName": "Dropbox",
+      "shortDescription": "Dropbox is a file hosting service that offers cloud storage, file synchronization, and client software. The company provides individuals and businesses with secure file storage, sharing, and collaboration tools. Dropbox has evolved to include features for team collaboration, document workflow, and integration with various productivity tools, making it essential for modern digital work environments.",
+      "imageUrl": "images/dropbox.png"
+    },
+    {
+      "id": "12",
+      "companyName": "WTW",
+      "shortDescription": "WTW (Willis Towers Watson) is a global advisory, broking, and solutions company that helps clients around the world turn risk into a path for growth. The company provides data-driven, insight-led solutions in the areas of people, risk, and capital. WTW offers services in insurance brokerage, advisory services, risk management, and human capital consulting to help organizations optimize performance.",
+      "imageUrl": "images/wtw.png"
+    },
+    {
+      "id": "13",
+      "companyName": "Financial Times",
+      "shortDescription": "The Financial Times is a leading global business publication that provides essential news, analysis, and commentary on business, economics, and international affairs. Known for its distinctive pink pages, the FT delivers high-quality journalism covering global business news, financial markets, and economic trends. The publication has successfully transitioned into digital media while maintaining its reputation for accurate, authoritative reporting and analysis.",
+      "imageUrl": "images/ft.png"
+    }
+  ]
 }
