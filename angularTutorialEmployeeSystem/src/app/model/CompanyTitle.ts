@@ -1,4 +1,4 @@
-export enum Company {
+export enum CompanyTitle {
   Apple = 'Apple',
   Google = 'Google',
   Microsoft = 'Microsoft',

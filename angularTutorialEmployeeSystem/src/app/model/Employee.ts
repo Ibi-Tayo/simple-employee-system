@@ -1,4 +1,4 @@
-import { Company } from "./Company";
+import { CompanyTitle } from "./CompanyTitle";
 import { JobTitle } from "./JobTitle";
 
 export interface Employee {
@@ -7,7 +7,7 @@ export interface Employee {
     dateOfBirth: Date;
     job:         JobTitle;
     yearsOfExperience: number;
-    company:     Company;
+    company:     CompanyTitle;
     salary:      number;
     address:     string;
     city:        string;

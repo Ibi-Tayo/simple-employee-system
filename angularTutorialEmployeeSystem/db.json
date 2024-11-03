@@ -45,52 +45,62 @@
     {
       "id": "1",
       "job": "Software Engineer",
-      "shortDescription": "Develops software solutions by studying information needs; conferring with users; studying systems flow, data usage, and work processes; investigating problem areas; following the software development lifecycle."
+      "shortDescription": "A software engineer designs, develops, tests, and maintains software systems and applications using programming languages, development tools, and engineering principles. They analyze user requirements, write and optimize code, debug software issues, collaborate with cross-functional teams, and implement software solutions that meet business needs. Software engineers also focus on software architecture, performance optimization, security considerations, and following best practices in software development while staying current with emerging technologies and methodologies. They may work on various types of software, from mobile apps and web applications to operating systems and embedded software, often using version control systems and participating in code reviews to ensure quality and maintainability.",
+      "imageUrl": "images/profile1.png"
     },
     {
       "id": "2",
       "job": "Web Developer",
-      "shortDescription": "Designs and develops websites and web applications by studying existing technology stack; analyzing browser compatibility techniques; evaluating solution architecture and design; developing documentation."
+      "shortDescription": "A web developer creates and maintains websites and web applications by writing code in languages like HTML, CSS, and JavaScript. They focus on both the visual aspects that users see (front-end development) and the behind-the-scenes functionality (back-end development), ensuring websites are responsive, user-friendly, and perform well across different browsers and devices. Web developers work with databases, implement security measures, optimize website performance, debug issues, and collaborate with designers and stakeholders to turn concepts into functioning web solutions. They often use frameworks, content management systems, and development tools while staying updated with web standards, accessibility guidelines, and emerging web technologies to create modern, efficient web experiences.",
+      "imageUrl": "images/profile2.webp"
     },
     {
       "id": "3",
       "job": "Frontend Developer",
-      "shortDescription": "Designs and develops user interfaces by studying information needs; conferring with users; studying systems flow, data usage, and work processes; investigating problem areas; following the software development lifecycle."
+      "shortDescription": "A front-end developer specializes in creating the user-facing parts of websites and web applications, focusing on what users see and interact with in their browsers. They transform design mockups into functional interfaces using HTML for structure, CSS for styling and layout, and JavaScript for interactivity and dynamic content. Front-end developers ensure websites are responsive across different screen sizes, optimize page loading speeds, maintain consistent design elements, implement accessibility standards, and create smooth user experiences. They typically work with modern frameworks like React, Vue, or Angular, collaborate closely with designers and back-end developers, debug browser compatibility issues, and stay current with front-end technologies, UI/UX best practices, and web performance optimization techniques.",
+      "imageUrl": "images/profile3.png"
     },
     {
       "id": "4",
       "job": "Backend Developer",
-      "shortDescription": "Designs and develops server-side applications by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+      "shortDescription": "A back-end developer focuses on server-side development, building and maintaining the behind-the-scenes technology that powers websites and applications. They write server-side code using languages like Python, Java, PHP, or Node.js to handle data storage, security, business logic, and database operations. Back-end developers design and optimize databases, create APIs for front-end communication, implement server architecture, manage user authentication, handle server performance and scaling, and ensure data security and integrity. They work with databases (like MySQL, MongoDB, or PostgreSQL), server frameworks, cloud services, and caching systems while considering factors like application efficiency, security vulnerabilities, and system architecture to create robust and scalable server-side solutions.",
+      "imageUrl": "images/profile4.png"
     },
     {
       "id": "5",
       "job": "Fullstack Developer",
-      "shortDescription": "Designs and develops websites and web applications by studying existing technology stack; analyzing browser compatibility techniques; evaluating solution architecture and design; developing documentation."
+      "shortDescription": "A full-stack developer combines the skills of both front-end and back-end development, capable of working on all layers of a web application from user interface to server architecture. They write code for browsers using HTML, CSS, and JavaScript while also handling server-side programming, database management, and system architecture. Full-stack developers can create complete web applications independently, implementing user interfaces, designing APIs, managing databases, handling security, and deploying applications to production environments. They typically work with various frameworks and tools across the stack (like React or Angular for front-end, Node.js or Python for back-end), understand how different technologies interact, manage version control, and often take a holistic approach to problem-solving while considering both user experience and system performance.",
+      "imageUrl": "images/profile5.png"
     },
     {
       "id": "6",
       "job": "DevOps Engineer",
-      "shortDescription": "Designs and develops continuous integration and continuous deployment pipelines by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+      "shortDescription": "A DevOps engineer bridges the gap between software development and IT operations, focusing on streamlining and automating the software development lifecycle. They implement continuous integration and continuous deployment (CI/CD) pipelines, manage cloud infrastructure using tools like AWS, Azure, or GCP, and automate build, test, and deployment processes using tools like Jenkins, GitLab, or GitHub Actions. DevOps engineers handle container orchestration with technologies like Docker and Kubernetes, monitor system performance and reliability, implement infrastructure as code using tools like Terraform or Ansible, and manage system security and scalability. They collaborate with development and operations teams to improve deployment frequency, reduce time to market, ensure system stability, and implement best practices for logging, monitoring, and incident response while maintaining high availability and reliability of production systems.",
+      "imageUrl": "images/profile6.gif"
     },
     {
       "id": "7",
       "job": "System Administrator",
-      "shortDescription": "Designs and develops server infrastructure by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+      "shortDescription": "A system administrator, often called a sysadmin, is responsible for maintaining, configuring, and ensuring the reliable operation of computer systems and servers. They manage an organization's IT infrastructure, including installing and updating software, managing user accounts and access permissions, maintaining network security, implementing backup and recovery systems, and troubleshooting hardware and software issues. System administrators monitor system performance, manage storage resources, implement security policies, handle system patches and updates, maintain documentation, and ensure compliance with IT standards. They often work with various operating systems (like Linux or Windows Server), manage virtualization platforms, configure network services, and respond to technical support requests while planning for system scalability and disaster recovery to maintain continuous system operations.",
+      "imageUrl": "images/profile7.png"
     },
     {
       "id": "8",
       "job": "Network Engineer",
-      "shortDescription": "Designs and develops network infrastructure by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+      "shortDescription": "A network engineer designs, implements, and maintains the computer networks that organizations rely on for communication and data exchange. They configure and manage network hardware like routers, switches, firewalls, and load balancers while implementing network protocols and services (TCP/IP, DNS, DHCP). Network engineers are responsible for network security, monitoring network performance, troubleshooting connectivity issues, and optimizing network infrastructure for reliability and speed. They plan network capacity, implement disaster recovery solutions, manage VPNs and wireless networks, conduct network audits, and ensure network compliance with security standards. Network engineers often work with various networking technologies and tools, including SDN (Software-Defined Networking), cloud networking services, and network monitoring systems while staying current with emerging networking technologies and security threats to maintain robust and secure network infrastructure.",
+      "imageUrl": "images/profile8.png"
     },
     {
       "id": "9",
       "job": "Database Administrator",
-      "shortDescription": "Designs and develops database infrastructure by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+      "shortDescription": "A database administrator (DBA) manages and maintains database systems that store and organize an organization's critical data. They design database structures, implement data security measures, manage user permissions, monitor database performance, and ensure data integrity and availability. DBAs handle database backup and recovery procedures, optimize query performance, manage storage capacity, implement replication strategies, and troubleshoot database issues. They work with various database management systems (like Oracle, SQL Server, MySQL, or PostgreSQL), perform database upgrades and migrations, implement high availability solutions, and ensure data compliance with regulatory requirements. DBAs also collaborate with developers to optimize database design, write and review database code, maintain documentation, and develop strategies for data archival and retention while ensuring databases remain secure, efficient, and properly maintained for business operations.",
+      "imageUrl": "images/profile9.webp"
     },
     {
       "id": "10",
       "job": "Security Analyst",
-      "shortDescription": "Designs and develops security infrastructure by studying existing technology stack; analyzing solution architecture and design; developing documentation."
+      "shortDescription": "A security analyst, also known as a cybersecurity analyst or information security analyst, protects an organization's computer systems, networks, and data from security breaches and cyber threats. They monitor security systems for potential intrusions, conduct vulnerability assessments and penetration testing, analyze security alerts, and investigate security incidents when they occur. Security analysts implement security tools and controls, develop security protocols, perform security audits, and stay current with emerging cyber threats and security technologies. They conduct risk assessments, recommend security improvements, monitor compliance with security policies, provide security awareness training to employees, and respond to security incidents through incident response procedures. Security analysts work with various security tools including SIEM systems, firewall management, encryption technologies, and threat detection software while maintaining detailed documentation of security events and continuously updating security measures to protect against evolving cyber threats.",
+      "imageUrl": "images/profile10.png"
     }
   ],
   "employees": [{"id":"pmmk","name":"Lenee Francklyn","dateOfBirth":"1979-01-12","job":"Full Stack Developer","yearsOfExperience":17,"company":"Dropbox","city":"Cologne","salary":140000,"address":"9 Memorial Road","postcode":"uk6 4yt"},

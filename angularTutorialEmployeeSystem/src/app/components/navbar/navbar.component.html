@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <div class="container-fluid">
     <ul class="navbar-nav">
-      <a class="navbar-brand" routerLink="master">
+      <a class="navbar-brand" routerLink="home/dashboard">
         <img
           src="favicon.ico"
           alt="Avatar Logo"
@@ -10,7 +10,7 @@
         />
       </a>
       <li class="nav-item">
-        <a class="nav-link" routerLink="master" routerLinkActive="active"
+        <a class="nav-link" routerLink="home/dashboard" routerLinkActive="active"
           >Home</a
         >
       </li>
@@ -20,14 +20,15 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="'client'" routerLinkActive="active"
-          >Client</a
+        <a class="nav-link" [routerLink]="'job-info'" routerLinkActive="active"
+          >Job role info</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'company-info'" routerLinkActive="active"
+          >Company info</a
         >
       </li>
     </ul>
-    <form class="d-flex">
-      <input class="form-control me-2" type="text" placeholder="Search" />
-      <button class="btn btn-primary" type="button">Search</button>
-    </form>
   </div>
 </nav>

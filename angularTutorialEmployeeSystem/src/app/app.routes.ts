@@ -1,24 +1,29 @@
 import { Routes } from '@angular/router';
-import { MasterComponent } from './components/master/master.component';
-import { ClientComponent } from './components/client/client.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { JobComponent } from './components/job/job.component';
+import { CompanyInfoComponent } from './components/company-info/company-info.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'master',
+    redirectTo: 'home/dashboard',
     pathMatch: 'full'
   },
   {
-    path: 'master',
-    component: MasterComponent
+    path: 'home/dashboard',
+    component: DashboardComponent
   },
   {
-    path: 'client',
-    component: ClientComponent
+    path: 'job-info',
+    component: JobComponent
   },
   {
     path: 'employee',
     component: EmployeeComponent
+  },
+  {
+    path: 'company-info',
+    component: CompanyInfoComponent
   }
 ];
