@@ -7,6 +7,7 @@ import { ToastService } from '../../services/toast.service';
 import { message } from '../../model/Message';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 import { CommonModule } from '@angular/common';
+import { catchError, EMPTY, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee',
@@ -23,8 +24,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './employee.component.scss',
 })
 export class EmployeeComponent implements OnInit {
-  allEmployees: Employee[] = [];
-  paginatedEmployees: Employee[] = [];
+  allEmployees$: Observable<Employee[]> | undefined;
+  paginatedEmployees$: Observable<Employee[]> | undefined;
   currentPageNumber: number = 1;
   employeesPerPage: number = 6;
   employeeIdToDelete: string = '';
@@ -42,37 +43,30 @@ export class EmployeeComponent implements OnInit {
     this.getPaginatedEmployees(this.currentPageNumber, this.employeesPerPage);
   }
 
-  private loadAllEmployees() {
-    this.employeeService.getAllEmployees().subscribe({
-      next: (res) => {
-        this.allEmployees = res;
-      },
-      error: (err) => {
+  loadAllEmployees() {
+    this.allEmployees$ = this.employeeService.getAllEmployees().pipe(
+      catchError((err) => {
         this.toastService.addNewToast({
           message: message.EmployeeLoadingFailMessage,
           classname: 'bg-danger text-light',
         });
-        console.error(err);
-      },
-    });
+        return EMPTY;
+      })
+    );
   }
 
   getPaginatedEmployees(currentPageNo: number, employeesPerPage: number) {
-    this.employeeService
+    this.paginatedEmployees$ = this.employeeService
       .getPaginatedEmployees(currentPageNo, employeesPerPage)
-      .subscribe({
-        next: (res) => {
-          this.paginatedEmployees = res.data;
-          console.log(this.paginatedEmployees)
-        },
-        error: (res) => {
-          console.log(res);
+      .pipe(
+        map((em) => em.data),
+        catchError((err) => {
           this.toastService.addNewToast({
             message: message.EmployeeLoadingFailMessage,
             classname: 'bg-danger text-light',
           });
-        },
-      });
+          return EMPTY;
+        }));
   }
 
   addEmployee(employeeForm: FormGroup): void {
