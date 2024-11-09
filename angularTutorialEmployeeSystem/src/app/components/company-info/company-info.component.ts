@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 export class CompanyInfoComponent implements OnInit {
   private companiesService = inject(CompaniesService);
   private carouselConfig = inject(NgbCarouselConfig);
-  companies$: Observable<Company[]> | undefined;
+  companies$: Observable<Company[]> = EMPTY;
 
   ngOnInit(): void {
     this.carouselConfig.interval = 3000; // (ms)

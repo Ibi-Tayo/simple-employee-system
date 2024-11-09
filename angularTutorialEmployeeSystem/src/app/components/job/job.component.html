@@ -1,6 +1,6 @@
 <div class="external">
   <div [hidden]="!isLoading" class="spinner-border text-info m-5"></div>
-  @for (j of jobList; track j.id; let i = $index;) {
+  @for (j of jobList$ | async; track j.id; let i = $index;) {
     <div class="card-content">
       <div class="card-wrapper">
         <div class="card-image-container">
