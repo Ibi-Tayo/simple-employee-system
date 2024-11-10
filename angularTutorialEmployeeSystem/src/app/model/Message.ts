@@ -13,6 +13,7 @@ export class Message {
     `Employee with name: ${name} was not updated`;
 
   EmployeeLoadingFailMessage = "There was a problem loading the employees table, try again later"
+  EmployeeNotFoundFailMessage = "Employee not found";
 }
 
 export const message = new Message();

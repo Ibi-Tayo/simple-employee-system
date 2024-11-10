@@ -1,4 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Employee } from '../../model/Employee';
 import { EmployeeService } from '../../services/employee.service';
@@ -7,7 +15,8 @@ import { ToastService } from '../../services/toast.service';
 import { message } from '../../model/Message';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 import { CommonModule } from '@angular/common';
-import { catchError, EMPTY, map, Observable, Subject, takeUntil } from 'rxjs';
+import { catchError, EMPTY, map } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-employee',
@@ -23,44 +32,44 @@ import { catchError, EMPTY, map, Observable, Subject, takeUntil } from 'rxjs';
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss',
 })
-export class EmployeeComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
-  allEmployees$: Observable<Employee[]> | undefined;
-  paginatedEmployees$: Observable<Employee[]> | undefined;
-  currentPageNumber: number = 1;
-  employeesPerPage: number = 6;
-  employeeIdToDelete: string = '';
-  employeeIdToUpdate: string = '';
-  employeeToUpdate: Employee | null = null;
-  showUpdateEmployee = false;
+export class EmployeeComponent implements OnInit {
+  private employeeService = inject(EmployeeService);
+  private toastService = inject(ToastService);
+  private destroyRef = inject(DestroyRef);
 
-  constructor(
-    private employeeService: EmployeeService,
-    private toastService: ToastService
-  ) {}
+  // Signals for state management
+  protected allEmployees = signal<Employee[]>([]);
+  protected paginatedEmployees = signal<Employee[]>([]);
+  protected currentPageNumber = signal<number>(1);
+  protected employeesPerPage = signal<number>(6);
+  protected employeeIdToDelete = signal<string>('');
+  protected employeeIdToUpdate = signal<string>('');
+  protected employeeToUpdate = signal<Employee | null>(null);
+  protected showUpdateEmployee = signal<boolean>(false);
 
+  // Computed signals
+  protected totalPages = computed(() =>
+    Math.ceil(this.allEmployees().length / this.employeesPerPage())
+  );
+
+  constructor() {
+    // Effect for loading employees when page or size changes
+    effect(() => {
+      this.loadPaginatedEmployees(
+        this.currentPageNumber(),
+        this.employeesPerPage()
+      );
+    });
+  }
   ngOnInit(): void {
     this.loadAllEmployees();
-    this.getPaginatedEmployees(this.currentPageNumber, this.employeesPerPage);
   }
 
-  loadAllEmployees() {
-    this.allEmployees$ = this.employeeService.getAllEmployees().pipe(
-      catchError((err) => {
-        this.toastService.addNewToast({
-          message: message.EmployeeLoadingFailMessage,
-          classname: 'bg-danger text-light',
-        });
-        return EMPTY;
-      })
-    );
-  }
-
-  getPaginatedEmployees(currentPageNo: number, employeesPerPage: number) {
-    this.paginatedEmployees$ = this.employeeService
-      .getPaginatedEmployees(currentPageNo, employeesPerPage)
+  private loadAllEmployees() {
+    this.employeeService
+      .getAllEmployees()
       .pipe(
-        map((em) => em.data),
+        takeUntilDestroyed(this.destroyRef),
         catchError((err) => {
           this.toastService.addNewToast({
             message: message.EmployeeLoadingFailMessage,
@@ -68,20 +77,52 @@ export class EmployeeComponent implements OnInit, OnDestroy {
           });
           return EMPTY;
         })
-      );
+      )
+      .subscribe((employees) => {
+        this.allEmployees.set(employees);
+      });
   }
 
-  addEmployee(employeeForm: FormGroup): void {
+  private loadPaginatedEmployees(
+    currentPageNo: number,
+    employeesPerPage: number
+  ) {
+    this.employeeService
+      .getPaginatedEmployees(currentPageNo, employeesPerPage)
+      .pipe(
+        map((em) => em.data),
+        takeUntilDestroyed(this.destroyRef),
+        catchError((err) => {
+          this.toastService.addNewToast({
+            message: message.EmployeeLoadingFailMessage,
+            classname: 'bg-danger text-light',
+          });
+          return EMPTY;
+        })
+      )
+      .subscribe((employees) => {
+        this.paginatedEmployees.set(employees);
+      });
+  }
+
+  protected setPage(pageNumber: number) {
+    this.currentPageNumber.set(pageNumber);
+  }
+
+  protected setEmployeesPerPage(count: number) {
+    this.employeesPerPage.set(count);
+  }
+
+  protected addEmployee(employeeForm: FormGroup): void {
     this.employeeService
       .addNewEmployee(employeeForm)
-      ?.pipe(takeUntil(this.destroy$))
+      ?.pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (res) => {
-          console.log(res);
           if (res) {
             this.toastService.addNewToast({
               message: message.EmployeeAdditionSuccessMessage(
-                employeeForm.value['name']
+                employeeForm.value['name'] // TODO: This shows null instead of name
               ),
               classname: 'bg-success text-light',
             });
@@ -100,21 +141,20 @@ export class EmployeeComponent implements OnInit, OnDestroy {
       });
   }
 
-  updateEmployee(employeeForm: FormGroup, id: string) {
-    let employeeName: string = employeeForm.get('name')?.value;
+  protected updateEmployee(employeeForm: FormGroup, id: string) {
+    const employeeName: string = employeeForm.get('name')?.value;
     this.employeeService
       .updateEmployee(employeeForm, id)
-      ?.pipe(takeUntil(this.destroy$))
+      ?.pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (res) => {
-          console.log(res);
           if (res) {
             this.toastService.addNewToast({
               message: message.EmployeeUpdateSuccessMessage(employeeName),
               classname: 'bg-success text-light',
             });
             this.loadAllEmployees();
-            this.showUpdateEmployee = false;
+            this.showUpdateEmployee.set(false);
           }
         },
         error: (err) => {
@@ -127,37 +167,33 @@ export class EmployeeComponent implements OnInit, OnDestroy {
       });
   }
 
-  getEmployeeByIdForUpdate(id: string): Employee | null {
+  protected getEmployeeByIdForUpdate(id: string) {
     this.employeeService
       .getEmployeeById(id)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (employee) => {
-          console.log(employee);
-          this.employeeToUpdate = employee;
-          this.showUpdateEmployee = true;
-          return employee;
+          this.employeeToUpdate.set(employee);
+          this.showUpdateEmployee.set(true);
         },
         error: (err) => {
           this.toastService.addNewToast({
-            message: message.EmployeeLoadingFailMessage,
+            message: message.EmployeeNotFoundFailMessage,
             classname: 'bg-danger text-light',
           });
           console.error(err);
-          this.employeeToUpdate = null;
+          this.employeeToUpdate.set(null);
         },
       });
-    return null;
   }
 
-  deleteEmployee(id: string) {
+  protected deleteEmployee(id: string) {
     this.employeeService
       .deleteEmployeeById(id)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (res) => {
           if (res) {
-            console.log(res);
             this.toastService.addNewToast({
               message: message.EmployeeDeletionSuccessMessage(id),
               classname: 'bg-success text-light',
@@ -173,9 +209,5 @@ export class EmployeeComponent implements OnInit, OnDestroy {
           console.error(err);
         },
       });
-  }
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

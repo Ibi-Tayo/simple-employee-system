@@ -17,7 +17,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for (employee of paginatedEmployees$ | async; track employee.id) {
+                @for (employee of paginatedEmployees(); track employee.id) {
                 <tr>
                   <td>{{ employee.id }}</td>
                   <td>{{ employee.name }}</td>
@@ -31,12 +31,10 @@
             </table>
             <div class="d-flex justify-content-between p-2">
               <ngb-pagination
-                [collectionSize]="(allEmployees$ | async)?.length || 0"
-                [(page)]="currentPageNumber"
-                [pageSize]="employeesPerPage"
-                (pageChange)="
-                  getPaginatedEmployees(currentPageNumber, employeesPerPage)
-                "
+                [collectionSize]="allEmployees().length"
+                [page]="currentPageNumber()"
+                [pageSize]="employeesPerPage()"
+                (pageChange)="setPage($event)"
                 [maxSize]="5"
                 [rotate]="true"
                 [ellipses]="false"
@@ -46,10 +44,8 @@
               <select
               class="form-select"
               style="width: auto"
-              [(ngModel)]="employeesPerPage"
-              (ngModelChange)="
-                getPaginatedEmployees(currentPageNumber, employeesPerPage)
-              "
+              [ngModel]="employeesPerPage()"
+              (ngModelChange)="setEmployeesPerPage($event)"
             >
               <option [ngValue]="4">4 items per page</option>
               <option [ngValue]="6">6 items per page</option>
@@ -78,30 +74,32 @@
           type="text"
           class="form-control"
           placeholder="Enter ID"
-          [(ngModel)]="employeeIdToDelete"
-          (keydown.enter)="deleteEmployee(employeeIdToDelete)"
+          [ngModel]="employeeIdToDelete()"
+          (ngModelChange)="employeeIdToDelete.set($event)"
+          (keydown.enter)="deleteEmployee(employeeIdToDelete())"
         />
         <button
           type="button"
           class="btn btn-danger mt-3"
-          [disabled]="!employeeIdToDelete"
-          (click)="deleteEmployee(employeeIdToDelete)"
+          [disabled]="!employeeIdToDelete()"
+          (click)="deleteEmployee(employeeIdToDelete())"
         >
           Delete
         </button>
       </div>
       <div class="card-body">
         <h5>Update Employee</h5>
-        <form (ngSubmit)="getEmployeeByIdForUpdate(employeeIdToUpdate)">
+        <form (ngSubmit)="getEmployeeByIdForUpdate(employeeIdToUpdate())">
           <input
             type="text"
             class="form-control"
             placeholder="Enter ID"
-            [(ngModel)]="employeeIdToUpdate"
+            [ngModel]="employeeIdToUpdate()"
+            (ngModelChange)="employeeIdToUpdate.set($event)"
             name="employeeIdToUpdate"
           />
           <button
-            [disabled]="!employeeIdToUpdate"
+            [disabled]="!employeeIdToUpdate()"
             type="submit"
             class="btn btn-info mt-3"
           >
@@ -109,9 +107,9 @@
           </button>
         </form>
         <app-employee-form
-          [hidden]="!showUpdateEmployee"
-          (formSubmit)="updateEmployee($event, employeeIdToUpdate)"
-          [employeeToUpdate]="employeeToUpdate"
+          [hidden]="!showUpdateEmployee()"
+          (formSubmit)="updateEmployee($event, employeeIdToUpdate())"
+          [employeeToUpdate]="employeeToUpdate()"
         ></app-employee-form>
       </div>
     </div>

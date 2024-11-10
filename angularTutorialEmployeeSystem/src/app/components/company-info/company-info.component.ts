@@ -7,6 +7,7 @@ import { CompaniesService } from '../../services/companies.service';
 import { Company } from '../../model/Company';
 import { catchError, EMPTY, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-company-info',
@@ -24,6 +25,7 @@ export class CompanyInfoComponent implements OnInit {
   ngOnInit(): void {
     this.carouselConfig.interval = 3000; // (ms)
     this.companies$ = this.companiesService.getAllCompanies().pipe(
+      takeUntilDestroyed(),
       catchError((err) => {
         console.error(err);
         return EMPTY;
