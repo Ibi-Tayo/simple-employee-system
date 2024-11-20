@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { Colors } from 'chart.js';
+import { EmployeeService } from '../../services/employee.service';
+import { Employee } from '../../model/Employee';
+import {
+  calculateBasicDistribution,
+  GraphData,
+} from '../../scripts/data-aggregation';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,16 +16,50 @@ import Chart from 'chart.js/auto';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  chart: Chart<'pie', number[], string> | undefined;
+  private employeeService = inject(EmployeeService);
+  employees: Employee[] = [];
+
+  companyDistributionPieChart:
+    | Chart<'pie', number[], string | number | Date>
+    | undefined;
+  jobDistributionPieChart:
+    | Chart<'pie', number[], string | number | Date>
+    | undefined;
+
+  companyDistrData: GraphData = { labels: [], rawData: [] };
+  jobDistrData: GraphData = { labels: [], rawData: [] };
 
   ngOnInit() {
-    this.initializeChart();
+    Chart.register(Colors);
+    this.employeeService.getAllEmployees().subscribe({
+      next: (res) => {
+        this.employees = res;
+        this.initializeCompanyPieChart();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
-  initializeChart() {
-    this.chart = new Chart('myPie', {
+  initializeCompanyPieChart() {
+    this.companyDistrData = calculateBasicDistribution(
+      this.employees,
+      'company'
+    );
+    let data = {
+      labels: this.companyDistrData.labels,
+      datasets: [
+        {
+          label: 'Company Distribution',
+          data: this.companyDistrData.rawData,
+          hoverOffset: 4,
+        },
+      ],
+    };
+    this.companyDistributionPieChart = new Chart('companyDistribution', {
       type: 'pie',
-      data: this.data,
+      data: data,
       options: {
         responsive: true,
         plugins: {
@@ -27,26 +68,40 @@ export class DashboardComponent implements OnInit {
           },
           title: {
             display: true,
-            text: 'Chart.js Pie Chart',
+            text: 'Distribution of employees per company',
           },
         },
       },
     });
   }
 
-  data = {
-    labels: ['Red', 'Blue', 'Yellow'],
-    datasets: [
-      {
-        label: 'My First Dataset',
-        data: [300, 50, 100],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-        ],
-        hoverOffset: 4,
+  initializeJobPieChart() {
+    this.jobDistrData = calculateBasicDistribution(this.employees, 'job');
+    let data = {
+      labels: this.jobDistrData.labels,
+      datasets: [
+        {
+          label: 'Job Distribution',
+          data: this.jobDistrData.rawData,
+          hoverOffset: 4,
+        },
+      ],
+    };
+    this.jobDistributionPieChart = new Chart('jobDistribution', {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Distribution of employees per job title',
+          },
+        },
       },
-    ],
-  };
+    });
+  }
 }
