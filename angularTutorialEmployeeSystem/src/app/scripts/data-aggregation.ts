@@ -105,3 +105,44 @@ export function calculateYearsOfExperienceDistribution(
   };
   return data;
 }
+
+/**
+ * Provides distribution of employees by salary
+ * @param employees
+ * @returns \{labels: rawData:}
+ */
+export function calculateSalaryDistribution(
+  employees: Employee[]
+): GraphData {
+  const experienceBrackets = [
+    { label: '<40,000', test: (exp: number) => exp < 40000 },
+    { label: '40,000-60,000', test: (exp: number) => exp >= 40000 && exp < 60000 },
+    { label: '60,000-100,000', test: (exp: number) => exp >= 60000 && exp < 100000 },
+    { label: '100,000-200,000', test: (exp: number) => exp >= 100000 && exp < 200000 },
+    { label: '200,000+', test: (exp: number) => exp >= 200000 },
+  ];
+
+  const frequencyMap = new Map<string, number>();
+  // Initialize all brackets with 0
+  experienceBrackets.forEach((bracket) => frequencyMap.set(bracket.label, 0));
+
+  employees.forEach((employee) => {
+
+    const bracket = experienceBrackets.find((b) =>
+      b.test(employee.salary)
+    );
+    if (bracket) {
+      frequencyMap.set(
+        bracket.label,
+        (frequencyMap.get(bracket.label) ?? 0) + 1
+      );
+    }
+  });
+
+  let data: GraphData = {
+    labels: Array.from(frequencyMap.keys()),
+    rawData: Array.from(frequencyMap.values()),
+  };
+
+  return data;
+}

@@ -6,6 +6,7 @@ import { Employee } from '../../model/Employee';
 import {
   calculateAgeDistribution,
   calculateBasicDistribution,
+  calculateSalaryDistribution,
   GraphData,
 } from '../../scripts/data-aggregation';
 
@@ -20,28 +21,33 @@ export class DashboardComponent implements OnInit {
   private employeeService = inject(EmployeeService);
   employees: Employee[] = [];
 
-  companyDistributionPieChart:
+  companyDistributionChart:
     | Chart<'polarArea', number[], string | number | Date>
     | undefined;
-  jobDistributionBarChart:
+  jobDistributionChart:
     | Chart<'bar', number[], string | number | Date>
     | undefined;
-  ageDistributionPieChart:
+  ageDistributionChart:
     | Chart<'pie', number[], string | number | Date>
+    | undefined;
+  salaryDistributionChart:
+    | Chart<'doughnut', number[], string | number | Date>
     | undefined;
 
   companyDistrData: GraphData = { labels: [], rawData: [] };
   jobDistrData: GraphData = { labels: [], rawData: [] };
   ageDistrData: GraphData = { labels: [], rawData: [] };
+  salaryDistrData: GraphData = { labels: [], rawData: [] };
 
   ngOnInit() {
     //Chart.register(Colors);
     this.employeeService.getAllEmployees().subscribe({
       next: (res) => {
         this.employees = res;
-        this.initializeCompanyPieChart();
-        this.initializeJobBarChart();
-        this.initializeAgePieChart();
+        this.initializeCompanyChart();
+        this.initializeJobChart();
+        this.initializeAgeChart();
+        this.initializeSalaryChart();
       },
       error: (err) => {
         console.error(err);
@@ -49,7 +55,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  initializeCompanyPieChart() {
+  initializeCompanyChart() {
     this.companyDistrData = calculateBasicDistribution(
       this.employees,
       'company'
@@ -64,7 +70,7 @@ export class DashboardComponent implements OnInit {
         },
       ],
     };
-    this.companyDistributionPieChart = new Chart('companyDistribution', {
+    this.companyDistributionChart = new Chart('companyDistribution', {
       type: 'polarArea',
       data: data,
       options: {
@@ -86,7 +92,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  initializeJobBarChart() {
+  initializeJobChart() {
     this.jobDistrData = calculateBasicDistribution(this.employees, 'job');
     let data = {
       labels: this.jobDistrData.labels,
@@ -98,7 +104,7 @@ export class DashboardComponent implements OnInit {
         },
       ],
     };
-    this.jobDistributionBarChart = new Chart('jobDistribution', {
+    this.jobDistributionChart = new Chart('jobDistribution', {
       type: 'bar',
       data: data,
       options: {
@@ -120,7 +126,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  initializeAgePieChart() {
+  initializeAgeChart() {
     this.ageDistrData = calculateAgeDistribution(this.employees);
     let data = {
       labels: this.ageDistrData.labels,
@@ -132,7 +138,7 @@ export class DashboardComponent implements OnInit {
         },
       ],
     };
-    this.ageDistributionPieChart = new Chart('ageDistribution', {
+    this.ageDistributionChart = new Chart('ageDistribution', {
       type: 'pie',
       data: data,
       options: {
@@ -144,6 +150,40 @@ export class DashboardComponent implements OnInit {
           title: {
             display: true,
             text: 'Distribution of age across all employees',
+            font: {
+              size: 20,
+            },
+            color: 'white',
+          },
+        },
+      },
+    });
+  }
+
+  initializeSalaryChart() {
+    this.salaryDistrData = calculateSalaryDistribution(this.employees);
+    let data = {
+      labels: this.salaryDistrData.labels,
+      datasets: [
+        {
+          label: 'Salary Distribution',
+          data: this.salaryDistrData.rawData,
+          hoverOffset: 4,
+        },
+      ],
+    };
+    this.salaryDistributionChart = new Chart('salaryDistribution', {
+      type: 'doughnut',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Distribution of salary across all employees',
             font: {
               size: 20,
             },
