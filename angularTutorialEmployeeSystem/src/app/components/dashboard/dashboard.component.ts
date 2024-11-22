@@ -4,6 +4,7 @@ import { Colors } from 'chart.js';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../model/Employee';
 import {
+  calculateAgeDistribution,
   calculateBasicDistribution,
   GraphData,
 } from '../../scripts/data-aggregation';
@@ -20,21 +21,27 @@ export class DashboardComponent implements OnInit {
   employees: Employee[] = [];
 
   companyDistributionPieChart:
-    | Chart<'pie', number[], string | number | Date>
+    | Chart<'polarArea', number[], string | number | Date>
     | undefined;
-  jobDistributionPieChart:
+  jobDistributionBarChart:
+    | Chart<'bar', number[], string | number | Date>
+    | undefined;
+  ageDistributionPieChart:
     | Chart<'pie', number[], string | number | Date>
     | undefined;
 
   companyDistrData: GraphData = { labels: [], rawData: [] };
   jobDistrData: GraphData = { labels: [], rawData: [] };
+  ageDistrData: GraphData = { labels: [], rawData: [] };
 
   ngOnInit() {
-    Chart.register(Colors);
+    //Chart.register(Colors);
     this.employeeService.getAllEmployees().subscribe({
       next: (res) => {
         this.employees = res;
         this.initializeCompanyPieChart();
+        this.initializeJobBarChart();
+        this.initializeAgePieChart();
       },
       error: (err) => {
         console.error(err);
@@ -58,7 +65,7 @@ export class DashboardComponent implements OnInit {
       ],
     };
     this.companyDistributionPieChart = new Chart('companyDistribution', {
-      type: 'pie',
+      type: 'polarArea',
       data: data,
       options: {
         responsive: true,
@@ -69,13 +76,17 @@ export class DashboardComponent implements OnInit {
           title: {
             display: true,
             text: 'Distribution of employees per company',
+            font: {
+              size: 20,
+            },
+            color: 'white',
           },
         },
       },
     });
   }
 
-  initializeJobPieChart() {
+  initializeJobBarChart() {
     this.jobDistrData = calculateBasicDistribution(this.employees, 'job');
     let data = {
       labels: this.jobDistrData.labels,
@@ -87,8 +98,8 @@ export class DashboardComponent implements OnInit {
         },
       ],
     };
-    this.jobDistributionPieChart = new Chart('jobDistribution', {
-      type: 'pie',
+    this.jobDistributionBarChart = new Chart('jobDistribution', {
+      type: 'bar',
       data: data,
       options: {
         responsive: true,
@@ -99,6 +110,44 @@ export class DashboardComponent implements OnInit {
           title: {
             display: true,
             text: 'Distribution of employees per job title',
+            font: {
+              size: 20,
+            },
+            color: 'white',
+          },
+        },
+      },
+    });
+  }
+
+  initializeAgePieChart() {
+    this.ageDistrData = calculateAgeDistribution(this.employees);
+    let data = {
+      labels: this.ageDistrData.labels,
+      datasets: [
+        {
+          label: 'Age Distribution',
+          data: this.ageDistrData.rawData,
+          hoverOffset: 4,
+        },
+      ],
+    };
+    this.ageDistributionPieChart = new Chart('ageDistribution', {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Distribution of age across all employees',
+            font: {
+              size: 20,
+            },
+            color: 'white',
           },
         },
       },

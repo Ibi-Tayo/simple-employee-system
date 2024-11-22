@@ -55,15 +55,17 @@ export function calculateAgeDistribution(employees: Employee[]): GraphData {
     labels: Array.from(frequencyMap.keys()),
     rawData: Array.from(frequencyMap.values()),
   };
+  console.dir(data);
   return data;
 }
 
 function calculateAge(dob: Date): number {
-  let yrs = dob.getFullYear();
+  let dobDate = new Date(dob);
+  let yrs = dobDate.getFullYear();
   let today = new Date();
   let todayYears = today.getFullYear();
   let age = todayYears - yrs;
-  return today.getMonth() < dob.getMonth() ? age - 1 : age;
+  return today.getMonth() < dobDate.getMonth() ? age - 1 : age;
 }
 
 /**
