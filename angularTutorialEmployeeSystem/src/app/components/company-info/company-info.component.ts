@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import {
   NgbCarouselConfig,
   NgbCarouselModule,
@@ -20,12 +20,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class CompanyInfoComponent implements OnInit {
   private companiesService = inject(CompaniesService);
   private carouselConfig = inject(NgbCarouselConfig);
+  private destroyRef = inject(DestroyRef);
   companies$: Observable<Company[]> = EMPTY;
 
   ngOnInit(): void {
     this.carouselConfig.interval = 3000; // (ms)
     this.companies$ = this.companiesService.getAllCompanies().pipe(
-      takeUntilDestroyed(),
+      takeUntilDestroyed(this.destroyRef),
       catchError((err) => {
         console.error(err);
         return EMPTY;

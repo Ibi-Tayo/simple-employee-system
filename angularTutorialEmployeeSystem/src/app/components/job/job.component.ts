@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { JobsService } from '../../services/jobs.service';
 import { Job } from '../../model/Job';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './job.component.scss',
 })
 export class JobComponent implements OnInit {
-  constructor(private jobsService: JobsService) {}
+  constructor(private jobsService: JobsService, private destroyRef: DestroyRef) {}
 
   jobList$: Observable<Job[]> = EMPTY;
   isLoading: boolean = false;
@@ -23,7 +23,7 @@ export class JobComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true
     this.jobList$ = this.jobsService.getAllJobs().pipe(
-      takeUntilDestroyed(),
+      takeUntilDestroyed(this.destroyRef),
       tap((jobs) => {
         this.isLoading = false;
         this.isCollapsed = jobs.map(() => true)
