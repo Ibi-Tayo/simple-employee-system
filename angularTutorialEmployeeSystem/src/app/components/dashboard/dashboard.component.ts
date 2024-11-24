@@ -1,13 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { Colors } from 'chart.js';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../model/Employee';
 import {
+  AggregateInfo,
   calculateAgeDistribution,
   calculateBasicDistribution,
   calculateSalaryDistribution,
   GraphData,
+  rankCompaniesBySalary,
 } from '../../scripts/data-aggregation';
 
 @Component({
@@ -33,11 +34,15 @@ export class DashboardComponent implements OnInit {
   salaryDistributionChart:
     | Chart<'doughnut', number[], string | number | Date>
     | undefined;
+  salaryByCompanyChart:
+    | Chart<'bar', number[], string | number | Date>
+    | undefined;
 
   companyDistrData: GraphData = { labels: [], rawData: [] };
   jobDistrData: GraphData = { labels: [], rawData: [] };
   ageDistrData: GraphData = { labels: [], rawData: [] };
   salaryDistrData: GraphData = { labels: [], rawData: [] };
+  salaryByCompanyData: AggregateInfo[] = [];
 
   ngOnInit() {
     //Chart.register(Colors);
@@ -48,6 +53,7 @@ export class DashboardComponent implements OnInit {
         this.initializeJobChart();
         this.initializeAgeChart();
         this.initializeSalaryChart();
+        this.initializeSalaryByCompanyChart();
       },
       error: (err) => {
         console.error(err);
@@ -98,7 +104,7 @@ export class DashboardComponent implements OnInit {
       labels: this.jobDistrData.labels,
       datasets: [
         {
-          label: 'Job Distribution',
+          label: 'Job Title',
           data: this.jobDistrData.rawData,
           hoverOffset: 4,
         },
@@ -176,6 +182,7 @@ export class DashboardComponent implements OnInit {
       type: 'doughnut',
       data: data,
       options: {
+        maintainAspectRatio: false,
         responsive: true,
         plugins: {
           legend: {
@@ -184,6 +191,57 @@ export class DashboardComponent implements OnInit {
           title: {
             display: true,
             text: 'Distribution of salary across all employees',
+            font: {
+              size: 20,
+            },
+            color: 'white',
+          },
+        },
+      },
+    });
+  }
+
+  initializeSalaryByCompanyChart() {
+    this.salaryByCompanyData = rankCompaniesBySalary(this.employees);
+    let data = {
+      labels: this.salaryByCompanyData.map((c) => c.company),
+      datasets: [
+        {
+          label: 'Salary',
+          data: this.salaryByCompanyData.map((c) => c.average),
+          backgroundColor: '#646695',
+          hoverOffset: 4,
+        },
+      ],
+    };
+
+    // dynamically calculate total min/max on salaries to set boundaries for the y axis on the chart
+    const minSalary =
+      Math.min(...this.salaryByCompanyData.map((c) => c.average)) - 1000;
+    const maxSalary =
+      Math.max(...this.salaryByCompanyData.map((c) => c.average)) + 1000;
+
+    this.salaryByCompanyChart = new Chart('salaryByCompanyDistribution', {
+      type: 'bar',
+      data: data,
+      options: {
+        maintainAspectRatio: false,
+        responsive: true,
+        scales: {
+          y: {
+            type: 'linear',
+            position: 'left',
+            min: minSalary,
+            max: maxSalary,
+          },
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Average salary ranked by company',
             font: {
               size: 20,
             },
