@@ -1,9 +1,5 @@
+import { CompanyTitle } from '../model/CompanyTitle';
 import { Employee } from '../model/Employee';
-
-export interface GraphData {
-  labels: (string | number | Date)[];
-  rawData: number[];
-}
 
 /**
  * Should calculate number of occurances of a given property's value in an employee. For example:
@@ -111,14 +107,21 @@ export function calculateYearsOfExperienceDistribution(
  * @param employees
  * @returns \{labels: rawData:}
  */
-export function calculateSalaryDistribution(
-  employees: Employee[]
-): GraphData {
+export function calculateSalaryDistribution(employees: Employee[]): GraphData {
   const experienceBrackets = [
     { label: '<40,000', test: (exp: number) => exp < 40000 },
-    { label: '40,000-60,000', test: (exp: number) => exp >= 40000 && exp < 60000 },
-    { label: '60,000-100,000', test: (exp: number) => exp >= 60000 && exp < 100000 },
-    { label: '100,000-200,000', test: (exp: number) => exp >= 100000 && exp < 200000 },
+    {
+      label: '40,000-60,000',
+      test: (exp: number) => exp >= 40000 && exp < 60000,
+    },
+    {
+      label: '60,000-100,000',
+      test: (exp: number) => exp >= 60000 && exp < 100000,
+    },
+    {
+      label: '100,000-200,000',
+      test: (exp: number) => exp >= 100000 && exp < 200000,
+    },
     { label: '200,000+', test: (exp: number) => exp >= 200000 },
   ];
 
@@ -127,10 +130,7 @@ export function calculateSalaryDistribution(
   experienceBrackets.forEach((bracket) => frequencyMap.set(bracket.label, 0));
 
   employees.forEach((employee) => {
-
-    const bracket = experienceBrackets.find((b) =>
-      b.test(employee.salary)
-    );
+    const bracket = experienceBrackets.find((b) => b.test(employee.salary));
     if (bracket) {
       frequencyMap.set(
         bracket.label,
@@ -146,3 +146,79 @@ export function calculateSalaryDistribution(
 
   return data;
 }
+
+/**
+ * Ranks companies by Property
+ */
+function rankCompaniesByProperty(
+  employees: Employee[],
+  property: keyof Employee,
+  roundTo: number = 100
+): AggregateInfo[] {
+  // Reduce the employees array to a salary map (mapping compnay by total salary and num employees)
+  const salaryMap = employees.reduce((map, currEmployee) => {
+    const current = map.get(currEmployee.company) ?? {
+      total: 0,
+      count: 0,
+    };
+    map.set(currEmployee.company, {
+      total: current.total + (currEmployee[property] as number),
+      count: current.count + 1,
+    });
+    return map;
+  }, new Map<CompanyTitle, { total: number; count: number }>());
+
+  // iterate through map and extract averages
+  return Array.from(salaryMap)
+    .map(([company, { total: totalSalary, count }]): AggregateInfo => {
+      return {
+        company: company,
+        average: Math.round(totalSalary / count / roundTo) * roundTo, // rounded to nearest 100
+      };
+    })
+    .sort((a, b) => b.average - a.average); // sort the average salaries in descending order
+}
+
+// Specific functions for salary and experience
+export function rankCompaniesBySalary(employees: Employee[]): AggregateInfo[] {
+  return rankCompaniesByProperty(employees, 'salary', 100);
+}
+
+export function rankCompaniesByExperience(
+  employees: Employee[]
+): AggregateInfo[] {
+  return rankCompaniesByProperty(employees, 'yearsOfExperience', 1);
+}
+
+/**
+ * Birthdays in a given time period
+ */
+export function findBirthdaysThisTimePeriod(
+  employees: Employee[],
+  timePeriod: TimePeriod
+): { name: string; birthday: string }[] {
+  switch (timePeriod) {
+    case 'DAY':
+      break;
+    case 'WEEK':
+      break;
+    case 'MONTH':
+      break;
+
+    default:
+      throw new Error(`Unsupported time period: ${timePeriod}`);
+  }
+  return [{ name: '', birthday: '' }];
+}
+
+export interface GraphData {
+  labels: (string | number | Date)[];
+  rawData: number[];
+}
+
+export type TimePeriod = 'DAY' | 'WEEK' | 'MONTH';
+
+export type AggregateInfo = {
+  company: CompanyTitle;
+  average: number;
+};
