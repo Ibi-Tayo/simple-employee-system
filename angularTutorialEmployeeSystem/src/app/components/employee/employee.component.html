@@ -1,94 +1,76 @@
-<div class="row">
-  <div class="col-8">
-    <div class="card">
-      <div class="card-header">Employee Table</div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-12 roles-table" style="height: 100vh">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>ID No</th>
-                  <th>Name</th>
-                  <th>Company</th>
-                  <th>City</th>
-                  <th>Job Title</th>
-                  <th>Salary</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (employee of paginatedEmployees(); track employee.id) {
-                <tr>
-                  <td>{{ employee.id }}</td>
-                  <td>{{ employee.name }}</td>
-                  <td>{{ employee.company }}</td>
-                  <td>{{ employee.city }}</td>
-                  <td>{{ employee.job }}</td>
-                  <td>{{ employee.salary | number }}</td>
-                </tr>
-                }
-              </tbody>
-            </table>
-            <div class="d-flex justify-content-between p-2">
-              <ngb-pagination
-                [collectionSize]="allEmployees().length"
-                [page]="currentPageNumber()"
-                [pageSize]="employeesPerPage()"
-                (pageChange)="setPage($event)"
-                [maxSize]="5"
-                [rotate]="true"
-                [ellipses]="false"
-                [boundaryLinks]="true"
-                aria-label="Default pagination"
-              />
-              <select
-              class="form-select"
-              style="width: auto"
-              [ngModel]="employeesPerPage()"
-              (ngModelChange)="setEmployeesPerPage($event)"
-            >
-              <option [ngValue]="4">4 items per page</option>
-              <option [ngValue]="6">6 items per page</option>
-              <option [ngValue]="14">14 items per page</option>
-            </select>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="main-container">
+  <div class="table-responsive">
+    <div class="card-header text-center py-3">Employees table </div>
+    <!-- Main Table  -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID No</th>
+          <th>Name</th>
+          <th>Company</th>
+          <th>City</th>
+          <th>Job Title</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (employee of paginatedEmployees(); track employee.id) {
+        <tr>
+          <td>{{ employee.id }}</td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.company }}</td>
+          <td>{{ employee.city }}</td>
+          <td>{{ employee.job }}</td>
+          <td>{{ employee.salary | number }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
   </div>
-  <div class="col-4">
+
+  <div class="pagination-controls">
+    <!-- Pagination controls -->
+    <ngb-pagination
+      [collectionSize]="allEmployees().length"
+      [page]="currentPageNumber()"
+      [pageSize]="employeesPerPage()"
+      (pageChange)="setPage($event)"
+      [maxSize]="5"
+      [rotate]="true"
+      [ellipses]="false"
+      [boundaryLinks]="true"
+      aria-label="Default pagination"
+    />
+    <select
+      class="form-select mx-3 custom-font-size"
+      style="width: auto"
+      [ngModel]="employeesPerPage()"
+      (ngModelChange)="setEmployeesPerPage($event)"
+    >
+      <option [ngValue]="4">4 items</option>
+      <option [ngValue]="6">6 items</option>
+      <option [ngValue]="14">14 items</option>
+    </select>
+  </div>
+
+  <!-- Action Cards -->
+  <div class="action-cards">
+    <!-- Add Employee Card -->
     <div class="card">
       <div class="card-header">Add Employee</div>
       <div class="card-body">
+        <!-- Add Employee Form Content -->
         <app-employee-form
           (formSubmit)="addEmployee($event)"
         ></app-employee-form>
       </div>
     </div>
-    <div class="card mt-2">
-      <div class="card-header">Actions</div>
+
+    <!-- Update Employee Card -->
+    <div class="card">
+      <div class="card-header">Update Employee</div>
       <div class="card-body">
-        <h5>Delete Employee</h5>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter ID"
-          [ngModel]="employeeIdToDelete()"
-          (ngModelChange)="employeeIdToDelete.set($event)"
-          (keydown.enter)="deleteEmployee(employeeIdToDelete())"
-        />
-        <button
-          type="button"
-          class="btn btn-danger mt-3"
-          [disabled]="!employeeIdToDelete()"
-          (click)="deleteEmployee(employeeIdToDelete())"
-        >
-          Delete
-        </button>
-      </div>
-      <div class="card-body">
-        <h5>Update Employee</h5>
+        <!-- Update Employee Form Content -->
         <form (ngSubmit)="getEmployeeByIdForUpdate(employeeIdToUpdate())">
           <input
             type="text"
@@ -111,6 +93,29 @@
           (formSubmit)="updateEmployee($event, employeeIdToUpdate())"
           [employeeToUpdate]="employeeToUpdate()"
         ></app-employee-form>
+      </div>
+    </div>
+
+    <!-- Delete Employee Card -->
+    <div class="card">
+      <div class="card-header">Delete Employee</div>
+      <div class="card-body">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter ID"
+          [ngModel]="employeeIdToDelete()"
+          (ngModelChange)="employeeIdToDelete.set($event)"
+          (keydown.enter)="deleteEmployee(employeeIdToDelete())"
+        />
+        <button
+          type="button"
+          class="btn btn-danger mt-3"
+          [disabled]="!employeeIdToDelete()"
+          (click)="deleteEmployee(employeeIdToDelete())"
+        >
+          Delete
+        </button>
       </div>
     </div>
   </div>
