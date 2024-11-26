@@ -1,5 +1,9 @@
 .card-header {
   background-color: #646695;
+  position: sticky;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
 .custom-font-size {
@@ -12,6 +16,17 @@ ngb-pagination ::ng-deep a {
 
 ngb-pagination ::ng-deep ul > li.active > a {
   background-color: #1f1f33 !important;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  max-height: 38px;
+
+  select {
+    max-width: 150px;
+  }
 }
 
 .main-container {
@@ -58,16 +73,6 @@ ngb-pagination ::ng-deep ul > li.active > a {
   .card {
     width: 100%;
     margin: 0;
-  }
-
-  .pagination-controls {
-    display: flex;
-    justify-content: center;
-    margin: 1rem 0;
-
-    select {
-      max-width: 150px;
-    }
   }
 }
 
