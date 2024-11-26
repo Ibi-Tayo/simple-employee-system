@@ -1,3 +1,4 @@
+import { isThisWeek } from 'date-fns';
 import { CompanyTitle } from '../model/CompanyTitle';
 import { Employee } from '../model/Employee';
 
@@ -179,7 +180,6 @@ function rankCompaniesByProperty(
     .sort((a, b) => b.average - a.average); // sort the average salaries in descending order
 }
 
-// Specific functions for salary and experience
 export function rankCompaniesBySalary(employees: Employee[]): AggregateInfo[] {
   return rankCompaniesByProperty(employees, 'salary', 100);
 }
@@ -191,24 +191,40 @@ export function rankCompaniesByExperience(
 }
 
 /**
- * Birthdays in a given time period
+ * Gets a list of employees who's birthdays fall within the provided time period
+ * @param employees
+ * @param timePeriod
+ * @returns list of employees
  */
 export function findBirthdaysThisTimePeriod(
   employees: Employee[],
   timePeriod: TimePeriod
-): { name: string; birthday: string }[] {
+): Employee[] {
+  let today = new Date();
   switch (timePeriod) {
     case 'DAY':
-      break;
+      return employees.filter(
+        (e) =>
+          e.dateOfBirth.getDate() === today.getDate() &&
+          e.dateOfBirth.getMonth() === today.getMonth()
+      );
     case 'WEEK':
-      break;
+      return employees.filter((e) =>
+        isThisWeek(
+          new Date(
+            today.getFullYear(),
+            e.dateOfBirth.getMonth(),
+            e.dateOfBirth.getDate()
+          )
+        )
+      );
     case 'MONTH':
-      break;
-
+      return employees.filter(
+        (e) => e.dateOfBirth.getMonth() === today.getMonth()
+      );
     default:
       throw new Error(`Unsupported time period: ${timePeriod}`);
   }
-  return [{ name: '', birthday: '' }];
 }
 
 export interface GraphData {
