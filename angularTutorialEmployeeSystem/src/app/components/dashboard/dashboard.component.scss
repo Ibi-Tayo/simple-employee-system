@@ -1,3 +1,7 @@
+.top-container {
+  display: flex;
+}
+
 .charts {
     display: flex;
     margin-top: 40px;
@@ -13,4 +17,10 @@
 
   .chart {
     height: 300px;
+}
+
+@media (max-width: 768px) {
+  .top-container {
+    display: grid;
+  }
 }

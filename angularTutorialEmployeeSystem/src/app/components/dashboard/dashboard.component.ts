@@ -10,11 +10,12 @@ import {
   GraphData,
   rankCompaniesBySalary,
 } from '../../scripts/data-aggregation';
+import { EmployeeBirthdayComponent } from "../employee-birthday/employee-birthday.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [EmployeeBirthdayComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

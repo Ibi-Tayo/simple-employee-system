@@ -203,25 +203,25 @@ export function findBirthdaysThisTimePeriod(
   let today = new Date();
   switch (timePeriod) {
     case 'DAY':
-      return employees.filter(
-        (e) =>
-          e.dateOfBirth.getDate() === today.getDate() &&
-          e.dateOfBirth.getMonth() === today.getMonth()
-      );
+      return employees.filter((e) => {
+        let eDob = new Date(e.dateOfBirth);
+        return (
+          eDob.getDate() === today.getDate() &&
+          eDob.getMonth() === today.getMonth()
+        );
+      });
     case 'WEEK':
-      return employees.filter((e) =>
-        isThisWeek(
-          new Date(
-            today.getFullYear(),
-            e.dateOfBirth.getMonth(),
-            e.dateOfBirth.getDate()
-          )
-        )
-      );
+      return employees.filter((e) => {
+        let eDob = new Date(e.dateOfBirth);
+        return isThisWeek(
+          new Date(today.getFullYear(), eDob.getMonth(), eDob.getDate())
+        );
+      });
     case 'MONTH':
-      return employees.filter(
-        (e) => e.dateOfBirth.getMonth() === today.getMonth()
-      );
+      return employees.filter((e) => {
+        let eDob = new Date(e.dateOfBirth);
+        return eDob.getMonth() === today.getMonth();
+      });
     default:
       throw new Error(`Unsupported time period: ${timePeriod}`);
   }
