@@ -1,0 +1,36 @@
+.img-wrapper {
+  max-height: 30em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  max-width: 80%;
+  // max-height: 700px;
+}
+
+
+.carousel-caption h3  {
+  color: beige;
+  background-color: #00000025;
+  font-size: 2em; // Default font size
+}
+
+.carousel-caption p  {
+  color: beige;
+  background-color: #00000055;
+  font-size: 1em; // Default font size
+}
+
+@media (max-width: 768px) {
+  .carousel-caption h3 {
+    font-size: 1em; // Smaller font size for narrow screens
+  }
+
+  .carousel-caption p {
+    font-size: 0.475em; // Smaller font size for narrow screens
+  }
+}
+
+

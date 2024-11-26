@@ -1,33 +1,37 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <div class="container-fluid">
     <ul class="navbar-nav">
-      <a class="navbar-brand" routerLink="master">
-        <img
-          src="favicon.ico"
-          alt="Avatar Logo"
-          style="width: 40px"
-          class="rounded-pill"
-        />
-      </a>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="master" routerLinkActive="active"
-          >Home</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="'employee'" routerLinkActive="active"
-          >Employee</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="'client'" routerLinkActive="active"
-          >Client</a
-        >
-      </li>
+      <div class="nav-link-container">
+        <a class="navbar-brand" routerLink="home/dashboard">
+          <img
+            src="logo.png"
+            alt="Avatar Logo"
+            style="width: 50px"
+            class="rounded-pill"
+          />
+        </a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="home/dashboard" routerLinkActive="active"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'employee'" routerLinkActive="active"
+            >Employee</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'job-info'" routerLinkActive="active"
+            >Job role info</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'company-info'" routerLinkActive="active"
+            >Company info</a
+          >
+        </li>
+
+      </div>
     </ul>
-    <form class="d-flex">
-      <input class="form-control me-2" type="text" placeholder="Search" />
-      <button class="btn btn-primary" type="button">Search</button>
-    </form>
   </div>
 </nav>

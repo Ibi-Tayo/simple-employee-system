@@ -1,0 +1,23 @@
+<table class="mx-5">
+  <thead>
+    <p>Employee birthdays today! 🥳 </p>
+    <tr>
+      @if (birthdayEmployees.length > 0) {
+        <th>Employee</th>
+        <th>Birthday</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @if (birthdayEmployees.length > 0) {
+      @for (e of birthdayEmployees; track $index) {
+      <tr>
+        <td>🎉 {{e.name}} 🎉</td>
+        <td>{{e.dateOfBirth | date: 'mediumDate' }}</td>
+      </tr>
+      }
+    } @else {
+      <p>😔 No birthdays today 😔</p>
+    }
+  </tbody>
+</table>

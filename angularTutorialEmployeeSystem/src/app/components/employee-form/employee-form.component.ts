@@ -14,7 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { JobTitle } from '../../model/JobTitle';
-import { Company } from '../../model/Company';
+import { CompanyTitle } from '../../model/CompanyTitle';
 import { Employee } from '../../model/Employee';
 
 @Component({
@@ -30,7 +30,7 @@ export class EmployeeFormComponent implements OnInit {
 
   employeeForm!: FormGroup;
   jobTitles = Object.values(JobTitle);
-  companies = Object.values(Company);
+  companies = Object.values(CompanyTitle);
   isSubmitted = false;
 
   constructor(private fb: FormBuilder) {}

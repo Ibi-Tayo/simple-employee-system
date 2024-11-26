@@ -1,15 +1,31 @@
-  <div class="external">
-    <div [hidden]="!isLoading" class="spinner-border text-info m-5"></div>
-    @for (j of jobList ; track j.id) {
-    <div class="card">
-      <img class="card-img-top" src="images/profile1.jpg" alt="Card image" />
-      <div class="card-body">
-        <h4 class="card-title">{{ j.job }}</h4>
-        <p class="card-text">Technology division</p>
-        <a class="btn btn-primary">Learn more</a>
+<div class="external">
+  <div [hidden]="!isLoading" class="spinner-border text-info m-5"></div>
+  @for (j of jobList$ | async; track j.id; let i = $index;) {
+    <div class="card-content">
+      <div class="card-wrapper">
+        <div class="card-image-container">
+          <img class="cardImage" src="{{ j.imageUrl }}" alt="Card image" />
+        </div>
+        <div class="card-info">
+          <div class="card-title">
+            <h2>{{ j.job }}</h2>
+            <button
+              type="button"
+              class="btn ms-2"
+              (click)="isCollapsed[i] = !isCollapsed[i]"
+              [attr.aria-expanded]="!isCollapsed[i]"
+              aria-controls="collapseExample"
+            >
+              Learn more
+            </button>
+          </div>
+          <div class="card-body">
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
+              <p class="card-text">{{ j.shortDescription }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    }
-  </div>
-
-
+  }
+</div>

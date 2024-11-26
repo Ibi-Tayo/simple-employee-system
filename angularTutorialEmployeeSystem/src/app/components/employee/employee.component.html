@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-8">
     <div class="card">
-      <div class="card-header bg-success">Employee Table</div>
+      <div class="card-header">Employee Table</div>
       <div class="card-body">
         <div class="row">
           <div class="col-12 roles-table" style="height: 100vh">
@@ -17,26 +17,24 @@
                 </tr>
               </thead>
               <tbody>
-                @for (employee of paginatedEmployees; track employee.id) {
+                @for (employee of paginatedEmployees(); track employee.id) {
                 <tr>
                   <td>{{ employee.id }}</td>
                   <td>{{ employee.name }}</td>
                   <td>{{ employee.company }}</td>
                   <td>{{ employee.city }}</td>
                   <td>{{ employee.job }}</td>
-                  <td>{{ employee.salary }}</td>
+                  <td>{{ employee.salary | number }}</td>
                 </tr>
                 }
               </tbody>
             </table>
             <div class="d-flex justify-content-between p-2">
               <ngb-pagination
-                [collectionSize]="allEmployees.length"
-                [(page)]="currentPageNumber"
-                [pageSize]="employeesPerPage"
-                (pageChange)="
-                  getPaginatedEmployees(currentPageNumber, employeesPerPage)
-                "
+                [collectionSize]="allEmployees().length"
+                [page]="currentPageNumber()"
+                [pageSize]="employeesPerPage()"
+                (pageChange)="setPage($event)"
                 [maxSize]="5"
                 [rotate]="true"
                 [ellipses]="false"
@@ -46,10 +44,8 @@
               <select
               class="form-select"
               style="width: auto"
-              [(ngModel)]="employeesPerPage"
-              (ngModelChange)="
-                getPaginatedEmployees(currentPageNumber, employeesPerPage)
-              "
+              [ngModel]="employeesPerPage()"
+              (ngModelChange)="setEmployeesPerPage($event)"
             >
               <option [ngValue]="4">4 items per page</option>
               <option [ngValue]="6">6 items per page</option>
@@ -63,7 +59,7 @@
   </div>
   <div class="col-4">
     <div class="card">
-      <div class="card-header bg-success">Add Employee</div>
+      <div class="card-header">Add Employee</div>
       <div class="card-body">
         <app-employee-form
           (formSubmit)="addEmployee($event)"
@@ -71,37 +67,39 @@
       </div>
     </div>
     <div class="card mt-2">
-      <div class="card-header bg-success">Actions</div>
+      <div class="card-header">Actions</div>
       <div class="card-body">
         <h5>Delete Employee</h5>
         <input
           type="text"
           class="form-control"
           placeholder="Enter ID"
-          [(ngModel)]="employeeIdToDelete"
-          (keydown.enter)="deleteEmployee(employeeIdToDelete)"
+          [ngModel]="employeeIdToDelete()"
+          (ngModelChange)="employeeIdToDelete.set($event)"
+          (keydown.enter)="deleteEmployee(employeeIdToDelete())"
         />
         <button
           type="button"
           class="btn btn-danger mt-3"
-          [disabled]="!employeeIdToDelete"
-          (click)="deleteEmployee(employeeIdToDelete)"
+          [disabled]="!employeeIdToDelete()"
+          (click)="deleteEmployee(employeeIdToDelete())"
         >
           Delete
         </button>
       </div>
       <div class="card-body">
         <h5>Update Employee</h5>
-        <form (ngSubmit)="getEmployeeByIdForUpdate(employeeIdToUpdate)">
+        <form (ngSubmit)="getEmployeeByIdForUpdate(employeeIdToUpdate())">
           <input
             type="text"
             class="form-control"
             placeholder="Enter ID"
-            [(ngModel)]="employeeIdToUpdate"
+            [ngModel]="employeeIdToUpdate()"
+            (ngModelChange)="employeeIdToUpdate.set($event)"
             name="employeeIdToUpdate"
           />
           <button
-            [disabled]="!employeeIdToUpdate"
+            [disabled]="!employeeIdToUpdate()"
             type="submit"
             class="btn btn-info mt-3"
           >
@@ -109,9 +107,9 @@
           </button>
         </form>
         <app-employee-form
-          [hidden]="!showUpdateEmployee"
-          (formSubmit)="updateEmployee($event, employeeIdToUpdate)"
-          [employeeToUpdate]="employeeToUpdate"
+          [hidden]="!showUpdateEmployee()"
+          (formSubmit)="updateEmployee($event, employeeIdToUpdate())"
+          [employeeToUpdate]="employeeToUpdate()"
         ></app-employee-form>
       </div>
     </div>

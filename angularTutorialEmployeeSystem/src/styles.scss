@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Zen+Maru+Gothic:wght@300&display=swap');
+
+:root {
+  --primary-font: 'JetBrains Mono', sans-serif;
+}
+
+body {
+  font-family: var(--primary-font);
+}

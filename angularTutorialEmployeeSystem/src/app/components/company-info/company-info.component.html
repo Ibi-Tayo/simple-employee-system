@@ -1,0 +1,13 @@
+  <ngb-carousel>
+  @for (company of companies$ | async; track $index) {
+      <ng-template ngbSlide>
+        <div class="img-wrapper">
+          <img [src]="company.imageUrl" [alt]="company.companyName + 'image logo'" />
+        </div>
+        <div class="carousel-caption">
+          <h3>{{company.companyName}}</h3>
+          <p>{{company.shortDescription}}</p>
+        </div>
+      </ng-template>
+    }
+  </ngb-carousel>

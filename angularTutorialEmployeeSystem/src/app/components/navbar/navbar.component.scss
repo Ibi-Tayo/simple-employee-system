@@ -1,0 +1,11 @@
+a {
+  margin: 1em;
+}
+
+@media (min-width: 768px) {
+  .nav-link-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
