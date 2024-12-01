@@ -1,10 +1,89 @@
 .card-header {
   background-color: #646695;
+  position: sticky;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
+
+.custom-font-size {
+  font-size: 0.8rem;
+}
+
 ngb-pagination ::ng-deep a {
   color: #646695 !important;
 }
 
 ngb-pagination ::ng-deep ul > li.active > a {
   background-color: #1f1f33 !important;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  max-height: 38px;
+
+  select {
+    max-width: 150px;
+  }
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.action-cards {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (min-width: 769px) {
+  .action-cards {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 100%;
+
+    th, td {
+      min-width: 120px;
+      white-space: nowrap;
+      padding: 0.5rem;
+    }
+  }
+
+  .action-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+
+  table {
+    th, td {
+      padding: 0.375rem;
+    }
+  }
 }
