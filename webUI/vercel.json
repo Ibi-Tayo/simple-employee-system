@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/**",
+      "src": "dist/angular-tutorial-employee-system/browser/**",
       "use": "@vercel/static"
     }
   ],
@@ -13,7 +13,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "dist/angular-tutorial-employee-system/browser"
+      "dest": "dist/angular-tutorial-employee-system/browser/index.html"
     }
   ]
 }
