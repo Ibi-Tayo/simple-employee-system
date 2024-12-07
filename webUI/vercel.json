@@ -17,7 +17,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "dist/index.html"
+      "dest": "dist/angular-tutorial-employee-system/browser"
     }
   ]
 }
