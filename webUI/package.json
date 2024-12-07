@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
+    "serve:json": "json-server --watch db.json",
+    "serve:local": "concurrently \"ng serve\" \"json-server --watch db.json\"",
     "server": "npx json-server db.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -23,24 +25,31 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.6",
+    "concurrently": "^9.1.0",
     "date-fns": "^4.1.0",
-    "json-server": "^1.0.0-beta.3",
+    "express": "^4.21.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.2",
-    "@angular/cli": "^18.2.2",
+    "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.0",
     "@angular/localize": "^18.2.8",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.2.0",
+    "json-server": "0.17.4",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.5.2"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.2.",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
