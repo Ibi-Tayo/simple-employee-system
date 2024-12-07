@@ -52,7 +52,6 @@ export function calculateAgeDistribution(employees: Employee[]): GraphData {
     labels: Array.from(frequencyMap.keys()),
     rawData: Array.from(frequencyMap.values()),
   };
-  console.dir(data);
   return data;
 }
 
