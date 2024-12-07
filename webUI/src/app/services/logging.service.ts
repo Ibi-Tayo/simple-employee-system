@@ -9,7 +9,7 @@ import { LocalStoragePublisher } from '../model/logging/LocalStoragePublisher';
 export class LoggingService {
   constructor() {}
   level: LogLevel = LogLevel.INFO;
-  publishers: LogPublisher[] = [new ConsoleLogPublisher()]
+  publishers: LogPublisher[] = [new ConsoleLogPublisher(), new LocalStoragePublisher()]
 
   info(msg: string) {
     this.writeToLog(msg, LogLevel.INFO);
@@ -26,8 +26,9 @@ export class LoggingService {
   writeToLog(message: string, logLevel: LogLevel) {
    if (logLevel >= this.level) {
     // Build the message
-    let fullMessage = new Date() + " - ";
-    fullMessage += "Type: " + LogLevel[logLevel];
+    let now = new Date();
+    let fullMessage = "Type: " + LogLevel[logLevel];
+    fullMessage += ` - [${now.toDateString()}] - ${now.toLocaleTimeString("en-GB")} `;
     fullMessage += " - Message: " + message;
 
     // Publish message to various places
