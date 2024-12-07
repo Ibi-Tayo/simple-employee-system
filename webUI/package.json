@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "node index.js",
     "serve:json": "json-server --watch db.json",
     "serve:local": "concurrently \"ng serve\" \"json-server --watch db.json\"",
     "server": "npx json-server db.json",
@@ -50,7 +50,7 @@
     "typescript": "~5.5.2"
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.2.",
-  "main": "server.js",
+  "main": "index.js",
   "keywords": [],
   "author": "",
   "license": "ISC"
