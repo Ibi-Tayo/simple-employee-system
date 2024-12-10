@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using simple_employee_backend.Data;
 
 namespace simple_employee_backend.Controllers;
 
@@ -12,10 +14,12 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly DataContext _db;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, DataContext db)
     {
         _logger = logger;
+        _db = db;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
