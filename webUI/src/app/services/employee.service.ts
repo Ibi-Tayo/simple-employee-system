@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from '../model/Employee';
 import { environment } from '../../environments/environment';
-import { PaginatedEmployeeResponse } from '../model/PaginatedEmployeeResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -35,8 +34,8 @@ export class EmployeeService {
   }
 
   // /posts?_page=1&_per_page=25
-  getPaginatedEmployees(pageNo: number, perPage: number): Observable<PaginatedEmployeeResponse> {
-    return this.http.get<PaginatedEmployeeResponse>(`${this.url}?_page=${pageNo}&_per_page=${perPage}`)
+  getPaginatedEmployees(pageNo: number, perPage: number): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.url}?_page=${pageNo}&_per_page=${perPage}`)
   }
 
   getEmployeeById(id: string): Observable<Employee> {
