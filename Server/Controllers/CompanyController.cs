@@ -73,7 +73,7 @@ public class CompanyController(ILogger<CompanyController> logger, DataContext db
 
         try
         {
-            var companyToUpdate = db.Companies.Find(company.Id);
+            var companyToUpdate = await db.Companies.FindAsync(company.Id);
             if (companyToUpdate == null) return NotFound();
             db.Entry(companyToUpdate).CurrentValues.SetValues(company);
             await db.SaveChangesAsync();
@@ -90,7 +90,7 @@ public class CompanyController(ILogger<CompanyController> logger, DataContext db
     {
         try
         {
-            var companyToDelete = db.Companies.Find(id);
+            var companyToDelete = await db.Companies.FindAsync(id);
             if (companyToDelete == null) return NotFound();
             db.Companies.Remove(companyToDelete);
             await db.SaveChangesAsync();
