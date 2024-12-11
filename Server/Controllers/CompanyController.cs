@@ -10,29 +10,22 @@ namespace simple_employee_backend.Controllers;
 public class CompanyController(ILogger<CompanyController> logger, DataContext db) : ControllerBase
 {
     private readonly ILogger<CompanyController> _logger = logger;
-
-    [HttpGet(Name = "GetAllCompanies")]
-    public async Task<ActionResult<IEnumerable<Company>>> GetAllCompanies()
-    {
-        try
-        {
-            var companies = await db.Companies.ToListAsync();
-            return Ok(companies);
-        }
-        catch (DbException e)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
-        }
-    }
-
+    
     [HttpGet(Name = "GetPaginatedCompanies")]
-    public async Task<ActionResult<IEnumerable<Company>>> GetCompanies([FromQuery] int _page, [FromQuery] int _per_page)
+    public async Task<ActionResult<IEnumerable<Company>>> GetCompanies(
+        [FromQuery(Name = "_page")] int? page = null, 
+        [FromQuery(Name = "_per_page")] int? pageSize = null)
     {
         try
         {
+            if (!page.HasValue || !pageSize.HasValue)
+            {
+                var allCompanies = await db.Companies.ToListAsync();
+                return Ok(allCompanies);
+            }
             var companies = await db.Companies
-                .Skip((_page - 1) * _per_page)
-                .Take(_per_page)
+                .Skip((page.Value - 1) * pageSize.Value)
+                .Take(pageSize.Value)
                 .ToListAsync();
 
             return Ok(companies);
