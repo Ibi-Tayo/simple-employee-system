@@ -12,11 +12,12 @@ public class CompanyController(ILogger<CompanyController> logger, DataContext db
     private readonly ILogger<CompanyController> _logger = logger;
 
     [HttpGet(Name = "GetAllCompanies")]
-    public ActionResult<IEnumerable<Company>> GetAllCompanies()
+    public async Task<ActionResult<IEnumerable<Company>>> GetAllCompanies()
     {
         try
         {
-            return Ok(db.Companies.ToList());
+            var companies = await db.Companies.ToListAsync();
+            return Ok(companies);
         }
         catch (DbException e)
         {
@@ -43,11 +44,11 @@ public class CompanyController(ILogger<CompanyController> logger, DataContext db
     }
 
     [HttpGet("{id}", Name = "GetCompany")]
-    public ActionResult<Company> GetCompany(int id)
+    public async Task<ActionResult<Company>> GetCompany(int id)
     {
         try
         {
-            var company = db.Companies.Find(id);
+            var company = await db.Companies.FindAsync(id);
             return company != null ? Ok(company) : NotFound();
         }
         catch (DbException e)
@@ -57,13 +58,13 @@ public class CompanyController(ILogger<CompanyController> logger, DataContext db
     }
 
     [HttpPost(Name = "CreateCompany")]
-    public ActionResult<Company> CreateCompany(Company company)
+    public async Task<ActionResult<Company>> CreateCompany(Company company)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
         try
         {
             db.Companies.Add(company);
-            db.SaveChangesAsync();
+            await db.SaveChangesAsync();
             return CreatedAtAction(nameof(GetCompany), new { id = company.Id }, company);
         }
         catch (DbUpdateException e)
@@ -73,7 +74,7 @@ public class CompanyController(ILogger<CompanyController> logger, DataContext db
     }
 
     [HttpPut(Name = "UpdateCompany")]
-    public ActionResult<Company> UpdateCompany(Company company)
+    public async Task<ActionResult<Company>> UpdateCompany(Company company)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -82,7 +83,7 @@ public class CompanyController(ILogger<CompanyController> logger, DataContext db
             var companyToUpdate = db.Companies.Find(company.Id);
             if (companyToUpdate == null) return NotFound();
             db.Entry(companyToUpdate).CurrentValues.SetValues(company);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return NoContent();
         }
         catch (DbException e)
@@ -92,14 +93,14 @@ public class CompanyController(ILogger<CompanyController> logger, DataContext db
     }
 
     [HttpDelete("{id}", Name = "DeleteCompany")]
-    public ActionResult<Company> DeleteCompany(int id)
+    public async Task<ActionResult<Company>> DeleteCompany(int id)
     {
         try
         {
             var companyToDelete = db.Companies.Find(id);
             if (companyToDelete == null) return NotFound();
             db.Companies.Remove(companyToDelete);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return NoContent();
         }
         catch (DbException e)
