@@ -37,7 +37,7 @@ public class EmployeeController(ILogger<EmployeeController> logger, DataContext 
     }
 
     [HttpGet("{id}", Name = "GetEmployee")]
-    public async Task<ActionResult<Employee>> GetEmployee(int id)
+    public async Task<ActionResult<Employee>> GetEmployee(string id)
     {
         try
         {
@@ -86,7 +86,7 @@ public class EmployeeController(ILogger<EmployeeController> logger, DataContext 
     }
 
     [HttpDelete("{id}", Name = "DeleteEmployee")]
-    public async Task<ActionResult<Employee>> DeleteEmployee(int id)
+    public async Task<ActionResult<Employee>> DeleteEmployee(string id)
     {
         try
         {

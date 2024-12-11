@@ -1,3 +1,4 @@
 Server/.idea
 Server/obj
 Server/bin
+*.user
