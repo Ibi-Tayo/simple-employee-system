@@ -1,8 +1,8 @@
-Simple employee management system that can add employees that represent different companies.
+Simple (cross company) employee management system that can add employees who work for different companies. This project is just simple tinkering to help me acclimatize to the .net/angular environment. Ignore all 'employee information' and 'salary data', it's all fake XD.
+
 
 Features
 ---
-
 - CRUD operations for employee management on employee page
 - Can view all employees on employee page via table (with pagination)
 - Can view information on company job titles
@@ -10,10 +10,19 @@ Features
 - Can view basic graphical summaries on employee statistics (i.e. how employee salary scales with company (made up of course))
 
 
-Other things used
+Technology + Other things used
 ---
+- Angular frontend
+- .NET Core web api backend
+- SQLite database
 - Chart.js for graphs
 - Cypress for automated testing
 - Bootstrap/Ng-Bootstrap where needed for some visual elements
-- Json-server - to mock the backend API and database
+
+
+Deployment
+---
+- Angular front end is hosted on vercel
+- .NET web api is hosted on azure (app services)
+
 
