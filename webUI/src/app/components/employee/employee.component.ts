@@ -90,7 +90,6 @@ export class EmployeeComponent implements OnInit {
     this.employeeService
       .getPaginatedEmployees(currentPageNo, employeesPerPage)
       .pipe(
-        map((em) => em.data),
         takeUntilDestroyed(this.destroyRef),
         catchError((err) => {
           this.toastService.addNewToast({
