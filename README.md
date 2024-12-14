@@ -1,5 +1,7 @@
 Simple (cross company) employee management system that can add employees who work for different companies. This project is just simple tinkering to help me acclimatize to the .net/angular environment. Ignore all 'employee information' and 'salary data', it's all fake XD.
 
+![image](https://github.com/user-attachments/assets/682f4dbd-0dc3-423d-8f4c-696f0d2bd581)
+
 
 Features
 ---
