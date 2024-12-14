@@ -172,6 +172,10 @@ export class EmployeeComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (employee) => {
+          this.toastService.addNewToast({
+            message: message.EmployeeFoundSuccessMessage,
+            classname: 'bg-success text-light',
+          });
           this.employeeToUpdate.set(employee);
           this.showUpdateEmployee.set(true);
         },

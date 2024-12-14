@@ -43,7 +43,7 @@ export class EmployeeService {
     return this.http.get<Employee>(`${this.url}/${id}`);
   }
 
-  deleteEmployeeById(id: string): Observable<null> {
-   return this.http.delete<null>(`${this.url}/${id}`);
+  deleteEmployeeById(id: string): Observable<Employee> {
+   return this.http.delete<Employee>(`${this.url}/${id}`);
   }
 }

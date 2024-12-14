@@ -10,10 +10,10 @@ namespace simple_employee_backend.Controllers;
 public class EmployeeController(ILogger<EmployeeController> logger, DataContext db) : ControllerBase
 {
     private readonly ILogger<EmployeeController> _logger = logger;
-    
+
     [HttpGet(Name = "GetPaginatedEmployees")]
     public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees(
-        [FromQuery(Name = "_page")] int? page = null, 
+        [FromQuery(Name = "_page")] int? page = null,
         [FromQuery(Name = "_per_page")] int? pageSize = null)
     {
         try
@@ -23,6 +23,7 @@ public class EmployeeController(ILogger<EmployeeController> logger, DataContext 
                 var allEmployees = await db.Employees.ToListAsync();
                 return Ok(allEmployees);
             }
+
             var employees = await db.Employees
                 .Skip((page.Value - 1) * pageSize.Value)
                 .Take(pageSize.Value)
@@ -77,7 +78,7 @@ public class EmployeeController(ILogger<EmployeeController> logger, DataContext 
             if (employeeToUpdate == null) return NotFound();
             db.Entry(employeeToUpdate).CurrentValues.SetValues(employee);
             await db.SaveChangesAsync();
-            return NoContent();
+            return StatusCode(StatusCodes.Status201Created, employee);
         }
         catch (DbException e)
         {
@@ -94,7 +95,7 @@ public class EmployeeController(ILogger<EmployeeController> logger, DataContext 
             if (employeeToDelete == null) return NotFound();
             db.Employees.Remove(employeeToDelete);
             await db.SaveChangesAsync();
-            return NoContent();
+            return StatusCode(StatusCodes.Status200OK, employeeToDelete);
         }
         catch (DbException e)
         {

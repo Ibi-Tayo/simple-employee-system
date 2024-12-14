@@ -14,6 +14,7 @@ export class Message {
 
   EmployeeLoadingFailMessage = "There was a problem loading the employees table, try again later"
   EmployeeNotFoundFailMessage = "Employee not found";
+  EmployeeFoundSuccessMessage = "Employee found, details are available for editing";
 }
 
 export const message = new Message();
