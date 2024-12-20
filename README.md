@@ -18,7 +18,6 @@ Technology + Other things used
 - .NET Core web api backend
 - SQLite database
 - Chart.js for graphs
-- Cypress for automated testing
 - Bootstrap/Ng-Bootstrap where needed for some visual elements
 
 
