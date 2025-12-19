@@ -19,18 +19,18 @@ import { catchError, EMPTY, map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-employee',
-  standalone: true,
-  imports: [
-    NgbPagination,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbAlertModule,
-    EmployeeFormComponent,
-  ],
-  templateUrl: './employee.component.html',
-  styleUrl: './employee.component.scss',
+    selector: 'app-employee',
+    imports: [
+        NgbPagination,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbAlertModule,
+        EmployeeFormComponent,
+    ],
+    templateUrl: './employee.component.html',
+    styleUrl: './employee.component.scss',
+    standalone: true,
 })
 export class EmployeeComponent implements OnInit {
   private employeeService = inject(EmployeeService);

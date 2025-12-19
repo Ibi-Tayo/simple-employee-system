@@ -13,11 +13,11 @@ import {
 import { EmployeeBirthdayComponent } from "../employee-birthday/employee-birthday.component";
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [EmployeeBirthdayComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+    selector: 'app-dashboard',
+    imports: [EmployeeBirthdayComponent],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss',
+    standalone: true,
 })
 export class DashboardComponent implements OnInit {
   private employeeService = inject(EmployeeService);

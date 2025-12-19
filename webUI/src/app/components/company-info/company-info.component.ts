@@ -10,12 +10,11 @@ import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-company-info',
-  standalone: true,
-  imports: [NgbCarouselModule,  CommonModule],
-  templateUrl: './company-info.component.html',
-  styleUrl: './company-info.component.scss',
-  providers: [NgbCarouselConfig],
+    selector: 'app-company-info',
+    imports: [NgbCarouselModule, CommonModule],
+    templateUrl: './company-info.component.html',
+    styleUrl: './company-info.component.scss',
+    providers: [NgbCarouselConfig]
 })
 export class CompanyInfoComponent implements OnInit {
   private companiesService = inject(CompaniesService);
