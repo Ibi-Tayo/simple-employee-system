@@ -4,11 +4,11 @@ import { findBirthdaysThisTimePeriod } from '../../scripts/data-aggregation';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-employee-birthday',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './employee-birthday.component.html',
-  styleUrl: './employee-birthday.component.scss'
+    selector: 'app-employee-birthday',
+    imports: [CommonModule],
+    templateUrl: './employee-birthday.component.html',
+    styleUrl: './employee-birthday.component.scss',
+    standalone: true,
 })
 export class EmployeeBirthdayComponent implements OnInit, OnChanges {
 

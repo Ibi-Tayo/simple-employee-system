@@ -7,11 +7,11 @@ import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-job',
-  standalone: true,
-  imports: [NgbCollapseModule, CommonModule],
-  templateUrl: './job.component.html',
-  styleUrl: './job.component.scss',
+    selector: 'app-job',
+    imports: [NgbCollapseModule, CommonModule],
+    templateUrl: './job.component.html',
+    styleUrl: './job.component.scss',
+    standalone: true,
 })
 export class JobComponent implements OnInit {
   constructor(private jobsService: JobsService, private destroyRef: DestroyRef) {}

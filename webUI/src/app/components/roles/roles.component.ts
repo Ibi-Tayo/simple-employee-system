@@ -4,11 +4,11 @@ import { RolesService } from '../../services/roles.service';
 import { Role } from '../../model/Role';
 
 @Component({
-  selector: 'app-roles',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './roles.component.html',
-  styleUrl: './roles.component.scss',
+    selector: 'app-roles',
+    imports: [CommonModule],
+    templateUrl: './roles.component.html',
+    styleUrl: './roles.component.scss',
+    standalone: true,
 })
 export class RolesComponent implements OnInit {
   constructor(private rolesService: RolesService) {}
