@@ -29,7 +29,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         EmployeeFormComponent,
     ],
     templateUrl: './employee.component.html',
-    styleUrl: './employee.component.scss'
+    styleUrl: './employee.component.scss',
+    standalone: true,
 })
 export class EmployeeComponent implements OnInit {
   private employeeService = inject(EmployeeService);

@@ -21,7 +21,8 @@ import { Employee } from '../../model/Employee';
     selector: 'app-employee-form',
     imports: [FormsModule, ReactiveFormsModule],
     templateUrl: './employee-form.component.html',
-    styleUrl: './employee-form.component.scss'
+    styleUrl: './employee-form.component.scss',
+    standalone: true,
 })
 export class EmployeeFormComponent implements OnInit {
   @Output() formSubmit = new EventEmitter<FormGroup>();
